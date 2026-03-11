@@ -16,15 +16,8 @@ export default function AdminLogin() {
     e.preventDefault();
     setLoading(true);
     try {
-      if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
-        toast.success("Compte créé ! Vous êtes connecté.");
-        navigate("/admin");
-      } else {
-        await signIn(email, password);
-        navigate("/admin");
-      }
+      await signIn(email, password);
+      navigate("/admin");
     } catch (err: any) {
       toast.error(isSignUp ? "Erreur lors de la création du compte" : "Email ou mot de passe incorrect");
     } finally {
