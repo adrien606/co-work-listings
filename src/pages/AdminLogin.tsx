@@ -60,7 +60,7 @@ export default function AdminLogin() {
             disabled={loading}
             className="w-full bg-accent text-accent-foreground font-heading font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {loading ? "Chargement..." : isSignUp ? "Créer le compte" : "Se connecter"}
+            {loading ? "Connexion..." : "Se connecter"}
           </button>
           <button
             type="button"
