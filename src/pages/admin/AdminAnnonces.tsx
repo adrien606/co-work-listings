@@ -39,9 +39,9 @@ export default function AdminAnnonces() {
   };
 
   const statutLabel = (s: string) => {
-    if (s === "publiee") return <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">Publiée</span>;
-    if (s === "brouillon") return <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full">Brouillon</span>;
-    return <span className="bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">Archivée</span>;
+    if (s === "publiee") return <span className="bg-secondary text-secondary-foreground text-xs px-2 py-0.5 rounded-full">Publiée</span>;
+    if (s === "brouillon") return <span className="bg-accent/30 text-accent-foreground text-xs px-2 py-0.5 rounded-full">Brouillon</span>;
+    return <span className="bg-muted text-muted-foreground text-xs px-2 py-0.5 rounded-full">Archivée</span>;
   };
 
   return (
