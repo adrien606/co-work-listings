@@ -14,13 +14,12 @@ export default function Index() {
   const filtered = useMemo(() => {
     if (!annonces) return [];
     return annonces.filter((a) => {
-      if (filtreBatiment && a.batiment_id !== filtreBatiment) return false;
       if (filtreType && a.type_espace !== filtreType) return false;
-      if (surfaceMin && (a.surface || 0) < Number(surfaceMin)) return false;
-      if (budgetMax && (a.prix_mensuel || 0) > Number(budgetMax)) return false;
+      if (filtreSurface === "small" && (a.surface || 0) >= 50) return false;
+      if (filtreSurface === "large" && (a.surface || 0) < 50) return false;
       return true;
     });
-  }, [annonces, filtreBatiment, filtreType, surfaceMin, budgetMax]);
+  }, [annonces, filtreType, filtreSurface]);
 
   const grouped = useMemo(() => {
     const map = new Map<string, typeof filtered>();
