@@ -14,7 +14,226 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      annonce_services: {
+        Row: {
+          annonce_id: string
+          service_id: string
+        }
+        Insert: {
+          annonce_id: string
+          service_id: string
+        }
+        Update: {
+          annonce_id?: string
+          service_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "annonce_services_annonce_id_fkey"
+            columns: ["annonce_id"]
+            isOneToOne: false
+            referencedRelation: "annonces"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "annonce_services_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      annonces: {
+        Row: {
+          batiment_id: string | null
+          charges: string | null
+          conditions_bail: string | null
+          conditions_duree: string | null
+          conditions_garantie: string | null
+          conditions_notes: string | null
+          conditions_preavis: string | null
+          created_at: string
+          description: string | null
+          disponibilite: string | null
+          id: string
+          mise_en_avant: boolean | null
+          prix_mensuel: number | null
+          statut: string
+          surface: number | null
+          titre: string
+          type_espace: string
+          updated_at: string
+        }
+        Insert: {
+          batiment_id?: string | null
+          charges?: string | null
+          conditions_bail?: string | null
+          conditions_duree?: string | null
+          conditions_garantie?: string | null
+          conditions_notes?: string | null
+          conditions_preavis?: string | null
+          created_at?: string
+          description?: string | null
+          disponibilite?: string | null
+          id?: string
+          mise_en_avant?: boolean | null
+          prix_mensuel?: number | null
+          statut?: string
+          surface?: number | null
+          titre: string
+          type_espace?: string
+          updated_at?: string
+        }
+        Update: {
+          batiment_id?: string | null
+          charges?: string | null
+          conditions_bail?: string | null
+          conditions_duree?: string | null
+          conditions_garantie?: string | null
+          conditions_notes?: string | null
+          conditions_preavis?: string | null
+          created_at?: string
+          description?: string | null
+          disponibilite?: string | null
+          id?: string
+          mise_en_avant?: boolean | null
+          prix_mensuel?: number | null
+          statut?: string
+          surface?: number | null
+          titre?: string
+          type_espace?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "annonces_batiment_id_fkey"
+            columns: ["batiment_id"]
+            isOneToOne: false
+            referencedRelation: "batiments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      batiments: {
+        Row: {
+          adresse: string
+          created_at: string
+          description: string | null
+          id: string
+          nom: string
+          photo_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          adresse: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          nom: string
+          photo_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          adresse?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          nom?: string
+          photo_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      medias: {
+        Row: {
+          annonce_id: string
+          created_at: string
+          id: string
+          ordre: number
+          type: string
+          url: string
+        }
+        Insert: {
+          annonce_id: string
+          created_at?: string
+          id?: string
+          ordre?: number
+          type?: string
+          url: string
+        }
+        Update: {
+          annonce_id?: string
+          created_at?: string
+          id?: string
+          ordre?: number
+          type?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "medias_annonce_id_fkey"
+            columns: ["annonce_id"]
+            isOneToOne: false
+            referencedRelation: "annonces"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      page_content: {
+        Row: {
+          avantages: Json | null
+          chiffres: Json | null
+          description: string | null
+          id: string
+          photos: Json | null
+          titre: string | null
+          updated_at: string
+        }
+        Insert: {
+          avantages?: Json | null
+          chiffres?: Json | null
+          description?: string | null
+          id?: string
+          photos?: Json | null
+          titre?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avantages?: Json | null
+          chiffres?: Json | null
+          description?: string | null
+          id?: string
+          photos?: Json | null
+          titre?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          icone: string
+          id: string
+          nom: string
+          ordre: number
+        }
+        Insert: {
+          created_at?: string
+          icone?: string
+          id?: string
+          nom: string
+          ordre?: number
+        }
+        Update: {
+          created_at?: string
+          icone?: string
+          id?: string
+          nom?: string
+          ordre?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
