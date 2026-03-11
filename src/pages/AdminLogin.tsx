@@ -19,7 +19,7 @@ export default function AdminLogin() {
       await signIn(email, password);
       navigate("/admin");
     } catch (err: any) {
-      toast.error(isSignUp ? "Erreur lors de la création du compte" : "Email ou mot de passe incorrect");
+      toast.error("Email ou mot de passe incorrect");
     } finally {
       setLoading(false);
     }
