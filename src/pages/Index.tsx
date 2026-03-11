@@ -89,8 +89,20 @@ export default function Index() {
                 <option value="large">Plus de 50 m²</option>
               </select>
             </div>
+            <div className="flex-1 w-full">
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Prix mensuel</label>
+              <select
+                value={filtrePrix}
+                onChange={(e) => setFiltrePrix(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
+              >
+                <option value="">Tous les prix</option>
+                <option value="low">Moins de 1 000 €</option>
+                <option value="high">Plus de 1 000 €</option>
+              </select>
+            </div>
             <button
-              onClick={() => { setFiltreType(""); setFiltreSurface(""); }}
+              onClick={() => { setFiltreType(""); setFiltreSurface(""); setFiltrePrix(""); }}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 pb-1"
             >
               Réinitialiser
