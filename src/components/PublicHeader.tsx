@@ -16,8 +16,8 @@ export default function PublicHeader() {
   return (
     <header className="bg-primary sticky top-0 z-50">
       <div className="container flex items-center justify-between py-4">
-        <Link to="/" className="font-heading text-2xl font-bold text-primary-foreground">
-          BelAirCamp
+        <Link to="/" className="flex items-center gap-2">
+          <img src={logoBelaircamp} alt="Bel Air Camp" className="h-10 w-auto invert brightness-0 invert" style={{ filter: "brightness(0) invert(1)" }} />
         </Link>
 
         {/* Desktop nav */}

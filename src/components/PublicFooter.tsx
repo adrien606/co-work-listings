@@ -34,7 +34,7 @@ export default function PublicFooter() {
           </div>
         </div>
         <div className="border-t border-sidebar-border mt-8 pt-6 text-center text-xs text-lavender">
-          © {new Date().getFullYear()} BelAirCamp — Tous droits réservés. Mentions légales.
+          © {new Date().getFullYear()} Bel Air Camp — Tous droits réservés. Mentions légales.
         </div>
       </div>
     </footer>
