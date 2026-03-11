@@ -251,6 +251,24 @@ export default function AnnonceDetail() {
                   )}
                 </div>
               )}
+
+              {/* Carte */}
+              {annonce.batiment?.adresse && (
+                <div className="mt-8">
+                  <h2 className="font-heading text-xl font-semibold mb-3">Localisation</h2>
+                  <div className="rounded-lg overflow-hidden border">
+                    <iframe
+                      title="Localisation du bâtiment"
+                      width="100%"
+                      height="300"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(annonce.batiment.adresse)}`}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right: Info sidebar */}
