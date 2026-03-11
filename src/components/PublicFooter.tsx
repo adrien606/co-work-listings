@@ -1,5 +1,6 @@
 import { OWNER } from "@/lib/supabase";
 import { Mail, Phone } from "lucide-react";
+import logoBelaircamp from "@/assets/logo-belaircamp.png";
 
 export default function PublicFooter() {
   return (
@@ -7,7 +8,7 @@ export default function PublicFooter() {
       <div className="container py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-heading text-xl font-bold mb-3">BelAirCamp</h3>
+            <img src={logoBelaircamp} alt="Bel Air Camp" className="h-12 w-auto mb-3" style={{ filter: "brightness(0) invert(1)" }} />
             <p className="text-lavender text-sm">
               Espaces de co-working, bureaux privatifs, ateliers et salles de formation.
             </p>
@@ -33,7 +34,7 @@ export default function PublicFooter() {
           </div>
         </div>
         <div className="border-t border-sidebar-border mt-8 pt-6 text-center text-xs text-lavender">
-          © {new Date().getFullYear()} BelAirCamp — Tous droits réservés. Mentions légales.
+          © {new Date().getFullYear()} Bel Air Camp — Tous droits réservés. Mentions légales.
         </div>
       </div>
     </footer>
