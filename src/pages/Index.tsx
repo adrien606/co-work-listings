@@ -9,6 +9,7 @@ export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
   const [filtreType, setFiltreType] = useState("");
   const [filtreSurface, setFiltreSurface] = useState("");
+  const [filtrePrix, setFiltrePrix] = useState("");
 
   const filtered = useMemo(() => {
     if (!annonces) return [];
@@ -16,9 +17,11 @@ export default function Index() {
       if (filtreType && a.type_espace !== filtreType) return false;
       if (filtreSurface === "small" && (a.surface || 0) >= 50) return false;
       if (filtreSurface === "large" && (a.surface || 0) < 50) return false;
+      if (filtrePrix === "low" && (a.prix_mensuel || 0) >= 1000) return false;
+      if (filtrePrix === "high" && (a.prix_mensuel || 0) < 1000) return false;
       return true;
     });
-  }, [annonces, filtreType, filtreSurface]);
+  }, [annonces, filtreType, filtreSurface, filtrePrix]);
 
   const grouped = useMemo(() => {
     const map = new Map<string, typeof filtered>();
