@@ -1,13 +1,12 @@
 import { useState, useMemo } from "react";
-import { usePublicAnnonces, useBatiments } from "@/hooks/useAnnonces";
+import { usePublicAnnonces } from "@/hooks/useAnnonces";
 import AnnonceCard from "@/components/AnnonceCard";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search } from "lucide-react";
 
 export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
-  const { data: batiments } = useBatiments();
   const [filtreType, setFiltreType] = useState("");
   const [filtreSurface, setFiltreSurface] = useState("");
 
