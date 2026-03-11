@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Plus, Edit, Trash2, X, Loader2 } from "lucide-react";
+import heic2any from "heic2any";
 
 export default function AdminBatiments() {
   const { data: batiments, isLoading } = useBatiments();
