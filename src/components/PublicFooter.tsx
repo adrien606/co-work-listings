@@ -8,7 +8,7 @@ export default function PublicFooter() {
       <div className="container py-12">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-heading text-xl font-bold mb-3">BelAirCamp</h3>
+            <img src={logoBelaircamp} alt="Bel Air Camp" className="h-12 w-auto mb-3" style={{ filter: "brightness(0) invert(1)" }} />
             <p className="text-lavender text-sm">
               Espaces de co-working, bureaux privatifs, ateliers et salles de formation.
             </p>
