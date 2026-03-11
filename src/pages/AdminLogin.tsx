@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
@@ -14,10 +16,17 @@ export default function AdminLogin() {
     e.preventDefault();
     setLoading(true);
     try {
-      await signIn(email, password);
-      navigate("/admin");
-    } catch {
-      toast.error("Email ou mot de passe incorrect");
+      if (isSignUp) {
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+        toast.success("Compte créé ! Vous êtes connecté.");
+        navigate("/admin");
+      } else {
+        await signIn(email, password);
+        navigate("/admin");
+      }
+    } catch (err: any) {
+      toast.error(isSignUp ? "Erreur lors de la création du compte" : "Email ou mot de passe incorrect");
     } finally {
       setLoading(false);
     }
@@ -49,6 +58,7 @@ export default function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              minLength={6}
               className="w-full px-4 py-2.5 rounded-lg border bg-background text-sm"
             />
           </div>
@@ -57,7 +67,14 @@ export default function AdminLogin() {
             disabled={loading}
             className="w-full bg-accent text-accent-foreground font-heading font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {loading ? "Connexion..." : "Se connecter"}
+            {loading ? "Chargement..." : isSignUp ? "Créer le compte" : "Se connecter"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsSignUp(!isSignUp)}
+            className="w-full mt-3 text-sm text-lavender hover:text-primary-foreground transition-colors"
+          >
+            {isSignUp ? "Déjà un compte ? Se connecter" : "Créer un compte admin"}
           </button>
         </form>
       </div>
