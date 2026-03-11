@@ -28,8 +28,20 @@ export default function AdminBatiments() {
     try {
       let photoUrl = form.photo_url;
       if (photoFile) {
-        const path = `batiments/${Date.now()}_${photoFile.name}`;
-        const { error } = await supabase.storage.from("medias").upload(path, photoFile);
+        let fileToUpload: File | Blob = photoFile;
+        let fileName = photoFile.name;
+
+        // Convert HEIC to JPEG
+        if (photoFile.name.toLowerCase().endsWith(".heic") || photoFile.type === "image/heic") {
+          const converted = await heic2any({ blob: photoFile, toType: "image/jpeg", quality: 0.85 });
+          fileToUpload = Array.isArray(converted) ? converted[0] : converted;
+          fileName = photoFile.name.replace(/\.heic$/i, ".jpg");
+        }
+
+        const path = `batiments/${Date.now()}_${fileName}`;
+        const { error } = await supabase.storage.from("medias").upload(path, fileToUpload, {
+          contentType: fileToUpload instanceof File ? fileToUpload.type : "image/jpeg",
+        });
         if (!error) {
           const { data } = supabase.storage.from("medias").getPublicUrl(path);
           photoUrl = data.publicUrl;
