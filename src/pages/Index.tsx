@@ -8,11 +8,8 @@ import { Search, SlidersHorizontal } from "lucide-react";
 export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
   const { data: batiments } = useBatiments();
-  const [filtreBatiment, setFiltreBatiment] = useState("");
   const [filtreType, setFiltreType] = useState("");
-  const [surfaceMin, setSurfaceMin] = useState("");
-  const [budgetMax, setBudgetMax] = useState("");
-  const [showFilters, setShowFilters] = useState(false);
+  const [filtreSurface, setFiltreSurface] = useState("");
 
   const filtered = useMemo(() => {
     if (!annonces) return [];
