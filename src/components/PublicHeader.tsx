@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { OWNER } from "@/lib/supabase";
 import { Mail, Phone, Menu, X } from "lucide-react";
+import logoBelaircamp from "@/assets/logo-belaircamp.png";
 import { useState } from "react";
 
 export default function PublicHeader() {
