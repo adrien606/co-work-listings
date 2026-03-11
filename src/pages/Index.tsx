@@ -26,7 +26,7 @@ export default function Index() {
   const grouped = useMemo(() => {
     const map = new Map<string, typeof filtered>();
     filtered.forEach((a) => {
-      const key = a.batiment?.nom || "Autres";
+      const key = a.type_espace || "Autres";
       if (!map.has(key)) map.set(key, []);
       map.get(key)!.push(a);
     });
