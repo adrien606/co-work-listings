@@ -1,0 +1,41 @@
+import { OWNER } from "@/lib/supabase";
+import { Mail, Phone } from "lucide-react";
+
+export default function PublicFooter() {
+  return (
+    <footer className="bg-primary text-primary-foreground">
+      <div className="container py-12">
+        <div className="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="font-heading text-xl font-bold mb-3">BelAirCamp</h3>
+            <p className="text-lavender text-sm">
+              Espaces de co-working, bureaux privatifs, ateliers et salles de formation.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-heading font-semibold mb-3 text-gold">Contact</h4>
+            <div className="flex flex-col gap-2 text-sm text-lavender">
+              <span className="text-primary-foreground font-medium">{OWNER.name}</span>
+              <a href={`mailto:${OWNER.email}`} className="flex items-center gap-2 hover:text-gold transition-colors">
+                <Mail className="h-4 w-4" /> {OWNER.email}
+              </a>
+              <a href={`tel:${OWNER.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-gold transition-colors">
+                <Phone className="h-4 w-4" /> {OWNER.phone}
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 className="font-heading font-semibold mb-3 text-gold">Navigation</h4>
+            <div className="flex flex-col gap-2 text-sm text-lavender">
+              <a href="/" className="hover:text-gold transition-colors">Catalogue</a>
+              <a href="/a-propos" className="hover:text-gold transition-colors">À propos</a>
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-sidebar-border mt-8 pt-6 text-center text-xs text-lavender">
+          © {new Date().getFullYear()} BelAirCamp — Tous droits réservés. Mentions légales.
+        </div>
+      </div>
+    </footer>
+  );
+}
