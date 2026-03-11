@@ -62,13 +62,6 @@ export default function AdminLogin() {
           >
             {loading ? "Connexion..." : "Se connecter"}
           </button>
-          <button
-            type="button"
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="w-full mt-3 text-sm text-lavender hover:text-primary-foreground transition-colors"
-          >
-            {isSignUp ? "Déjà un compte ? Se connecter" : "Créer un compte admin"}
-          </button>
         </form>
       </div>
     </div>
