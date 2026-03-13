@@ -2,7 +2,13 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import { usePageContent, useBatiments } from "@/hooks/useAnnonces";
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, Building2, Ruler, LayoutGrid, Users, Briefcase } from "lucide-react";
+import { Mail, Phone, Building2, Ruler, LayoutGrid, Users, Briefcase, HelpCircle } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function APropos() {
   const { data: content } = usePageContent();
