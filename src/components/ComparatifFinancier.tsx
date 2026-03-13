@@ -165,7 +165,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
         <SliderRow label="Loyer marché" value={hyp.loyerM2An} min={80} max={300} step={5} unit="€/m²/an" onChange={update("loyerM2An")} />
         <SliderRow label="m² par poste" value={hyp.m2ParPoste} min={3} max={10} step={1} unit="m²" onChange={update("m2ParPoste")} />
         <SliderRow label="Taxe foncière" value={hyp.taxeFonciereM2} min={0.5} max={5} step={0.25} unit="€/m²/mois" onChange={update("taxeFonciereM2")} />
-        <SliderRow label="Charges locatives" value={hyp.chargesM2} min={0.5} max={5} step={0.25} unit="€/m²/mois" onChange={update("chargesM2")} />
+        <SliderRow label="Charges locatives" value={hyp.chargesM2An} min={5} max={50} step={1} unit="€/m²/an" onChange={update("chargesM2An")} />
         <SliderRow label="Énergie (élec, eau, chauff.)" value={hyp.energieM2} min={1} max={8} step={0.5} unit="€/m²/mois" onChange={update("energieM2")} />
         <SliderRow label="Internet fibre" value={hyp.internet} min={20} max={150} step={5} unit="€/mois" onChange={update("internet")} />
         <SliderRow label="Mobilier par poste" value={hyp.mobilierPoste} min={500} max={5000} step={100} unit="€ (achat)" onChange={update("mobilierPoste")} />
