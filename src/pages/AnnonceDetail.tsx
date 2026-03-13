@@ -262,6 +262,7 @@ export default function AnnonceDetail() {
         doc.setTextColor(150, 150, 150);
         doc.text("Estimations basees sur le marche bureaux Villeurbanne -- 150 EUR/m2/an (BureauxLocaux.com 2025)", col1, ty);
       }
+    }
 
     // Photos
     if (photos.length > 0) {
