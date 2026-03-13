@@ -120,8 +120,8 @@ export default function AnnonceDetail() {
       y += 5;
     }
 
-    // Comparatif financier (Bureau privatif uniquement)
-    if (annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface) {
+    // Comparatif financier (Bureau privatif + contrat de prestation uniquement)
+    if (annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.prix_mensuel && annonce.surface) {
       const surf = annonce.surface;
       const prix = annonce.prix_mensuel;
       const m2ParPoste = 5;
