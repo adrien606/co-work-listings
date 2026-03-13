@@ -7,28 +7,43 @@ import { Search, Check, X, Building2, Briefcase, FileText, Zap, Sparkles, Clock,
 
 export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
+  const [filtreContrat, setFiltreContrat] = useState("");
   const [filtreType, setFiltreType] = useState("");
-  const [filtreSurface, setFiltreSurface] = useState("");
-  const [filtrePrix, setFiltrePrix] = useState("");
+
+  // Types de contrat disponibles (extraits des données)
+  const typesContrat = useMemo(() => {
+    if (!annonces) return [];
+    const set = new Set(annonces.map((a) => a.conditions_bail).filter(Boolean) as string[]);
+    return Array.from(set).sort();
+  }, [annonces]);
+
+  // Types de produit disponibles (filtrés par contrat sélectionné)
+  const typesProduit = useMemo(() => {
+    if (!annonces) return [];
+    const base = filtreContrat ? annonces.filter((a) => a.conditions_bail === filtreContrat) : annonces;
+    const set = new Set(base.map((a) => a.type_espace).filter(Boolean));
+    return Array.from(set).sort();
+  }, [annonces, filtreContrat]);
 
   const filtered = useMemo(() => {
     if (!annonces) return [];
     return annonces.filter((a) => {
+      if (filtreContrat && a.conditions_bail !== filtreContrat) return false;
       if (filtreType && a.type_espace !== filtreType) return false;
-      if (filtreSurface === "small" && (a.surface || 0) >= 50) return false;
-      if (filtreSurface === "large" && (a.surface || 0) < 50) return false;
-      if (filtrePrix === "low" && (a.prix_mensuel || 0) >= 1000) return false;
-      if (filtrePrix === "high" && (a.prix_mensuel || 0) < 1000) return false;
       return true;
     });
-  }, [annonces, filtreType, filtreSurface, filtrePrix]);
+  }, [annonces, filtreContrat, filtreType]);
 
+  // Grouper par type de contrat, puis par type de produit
   const grouped = useMemo(() => {
-    const map = new Map<string, typeof filtered>();
+    const map = new Map<string, Map<string, typeof filtered>>();
     filtered.forEach((a) => {
-      const key = a.type_espace || "Autres";
-      if (!map.has(key)) map.set(key, []);
-      map.get(key)!.push(a);
+      const contratKey = a.conditions_bail || "Autre";
+      const produitKey = a.type_espace || "Autres";
+      if (!map.has(contratKey)) map.set(contratKey, new Map());
+      const sub = map.get(contratKey)!;
+      if (!sub.has(produitKey)) sub.set(produitKey, []);
+      sub.get(produitKey)!.push(a);
     });
     return map;
   }, [filtered]);
