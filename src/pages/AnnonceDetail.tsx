@@ -184,13 +184,16 @@ export default function AnnonceDetail() {
             <div className="lg:col-span-3">
               {photos.length > 0 ? (
                 <>
-                  <div className="aspect-[16/10] rounded-lg overflow-hidden mb-3">
+                  <button
+                    onClick={() => setLightboxOpen(true)}
+                    className="aspect-[16/10] rounded-lg overflow-hidden mb-3 w-full cursor-zoom-in"
+                  >
                     <img
                       src={photos[selectedPhoto]?.url}
                       alt={annonce.titre}
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </button>
                   {photos.length > 1 && (
                     <div className="flex gap-2 overflow-x-auto pb-2">
                       {photos.map((p, i) => (
