@@ -143,6 +143,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
     { label: "Frais d'entrée", bail: `~${fmtEur(fraisEntreeBail)} €`, presta: `${fmtEur(fraisEntreePrestation)} €` },
     { label: "Engagement minimum", bail: "3 ans", presta: "1 mois" },
     { label: "Préavis de sortie", bail: "6 mois", presta: "1 mois" },
+    ...(hyp.franchiseMois > 0 ? [{ label: "Franchise déduite", bail: `-${fmtEur(franchiseEconomie)} €`, presta: "—" }] : []),
     { label: "Coût total sur 3 ans", bail: `${fmtEur(coutTotal3ansBail)} €`, presta: `${fmtEur(coutTotal3ansPrestation)} €` },
   ];
 
