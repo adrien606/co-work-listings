@@ -51,7 +51,7 @@ export default function AnnonceCard({ annonce }: Props) {
           <div className="text-right text-sm text-lavender">
             <div>
               {annonce.surface} m²
-              {annonce.type_espace === "Bureau privatif" && annonce.surface && annonce.surface >= 4 && (
+              {annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.surface && annonce.surface >= 4 && (
                 <span className="block text-gold text-xs font-medium">{Math.floor(annonce.surface / 4)} postes</span>
               )}
             </div>

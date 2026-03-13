@@ -120,8 +120,8 @@ export default function AnnonceDetail() {
       y += 5;
     }
 
-    // Comparatif financier (Bureau privatif uniquement)
-    if (annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface) {
+    // Comparatif financier (Bureau privatif + contrat de prestation uniquement)
+    if (annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.prix_mensuel && annonce.surface) {
       const surf = annonce.surface;
       const prix = annonce.prix_mensuel;
       const m2ParPoste = 5;
@@ -463,7 +463,7 @@ export default function AnnonceDetail() {
               )}
 
               {/* Comparatif financier */}
-              {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
+              {annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.prix_mensuel && annonce.surface && (
                 <ComparatifFinancier prixPrestation={annonce.prix_mensuel} surfaceM2={annonce.surface} />
               )}
             </div>
@@ -490,7 +490,7 @@ export default function AnnonceDetail() {
                   </div>
                   <div className="text-lavender text-sm">
                     {annonce.surface} m² — Charges {annonce.charges}
-                    {annonce.type_espace === "Bureau privatif" && annonce.surface && annonce.surface >= 4 && (
+                    {annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.surface && annonce.surface >= 4 && (
                       <span className="ml-2 text-gold font-medium">· {Math.floor(annonce.surface / 4)} postes</span>
                     )}
                   </div>
@@ -508,7 +508,7 @@ export default function AnnonceDetail() {
                       </div>
                     )}
                   </div>
-                  {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
+                  {annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.prix_mensuel && annonce.surface && (
                     <a
                       href="#comparatif-bail"
                       className="mt-4 w-full flex items-center justify-center gap-2 bg-gold text-primary font-medium py-2 rounded-lg hover:opacity-90 transition-opacity text-sm"
