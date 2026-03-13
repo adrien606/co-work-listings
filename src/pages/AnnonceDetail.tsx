@@ -267,7 +267,7 @@ export default function AnnonceDetail() {
               {/* Conditions */}
               {(annonce.conditions_duree || annonce.conditions_bail) && (
                 <div className="mt-8">
-                  <h2 className="font-heading text-xl font-semibold mb-3">Conditions de location</h2>
+                  <h2 className="font-heading text-xl font-semibold mb-3">Conditions de location <span className="text-sm font-normal text-muted-foreground">(négociation possible)</span></h2>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {annonce.conditions_duree && (
                       <div className="flex items-start gap-2 text-sm">
@@ -300,11 +300,6 @@ export default function AnnonceDetail() {
                 </div>
               )}
 
-              {/* Comparatif financier */}
-              {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
-                <ComparatifFinancier prixPrestation={annonce.prix_mensuel} surfaceM2={annonce.surface} />
-              )}
-
               {/* Carte */}
               {annonce.batiment?.adresse && (
                 <div className="mt-8">
@@ -321,6 +316,11 @@ export default function AnnonceDetail() {
                     />
                   </div>
                 </div>
+              )}
+
+              {/* Comparatif financier */}
+              {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
+                <ComparatifFinancier prixPrestation={annonce.prix_mensuel} surfaceM2={annonce.surface} />
               )}
             </div>
 
