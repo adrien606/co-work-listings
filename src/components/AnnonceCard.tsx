@@ -13,7 +13,7 @@ export default function AnnonceCard({ annonce }: Props) {
   return (
     <Link
       to={`/annonce/${annonce.id}`}
-      className="group block bg-primary rounded-lg overflow-hidden border border-transparent hover:border-lavender transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
+      className="group flex flex-col bg-primary rounded-lg overflow-hidden border border-transparent hover:border-lavender transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 h-full"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         {photo ? (
