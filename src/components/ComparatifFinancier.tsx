@@ -290,11 +290,11 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
 
   return (
     <div className="mt-8">
-      <div className="bg-primary text-primary-foreground rounded-lg px-5 py-3 font-medium">
-        <span>📊 Comparer avec un bail classique</span>
-      </div>
-      <div className="mt-4">
-        <div className="bg-card border rounded-lg p-4">
+      <div className="bg-card border rounded-lg overflow-hidden">
+        <div className="bg-primary text-primary-foreground px-5 py-3 font-medium">
+          <span>📊 Comparer avec un bail classique</span>
+        </div>
+        <div className="p-4">
           {/* Toggle hypothèses */}
           <button
             onClick={() => setShowHypotheses(!showHypotheses)}
