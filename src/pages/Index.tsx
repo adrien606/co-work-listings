@@ -202,13 +202,13 @@ export default function Index() {
                     <td className="px-4 py-4 font-medium text-foreground">Mobilier, IT & aménagement</td>
                     <td className="px-4 py-4 text-foreground">
                       <span className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        <Check className="h-4 w-4 text-[hsl(var(--success))] shrink-0 mt-0.5" />
                         Inclus et opérationnel
                       </span>
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         À investir par le locataire
                       </span>
                     </td>
@@ -217,13 +217,13 @@ export default function Index() {
                     <td className="px-4 py-4 font-medium text-foreground">Charges (eau, électricité, entretien)</td>
                     <td className="px-4 py-4 text-foreground">
                       <span className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        <Check className="h-4 w-4 text-[hsl(var(--success))] shrink-0 mt-0.5" />
                         Incluses
                       </span>
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         À prévoir séparément
                       </span>
                     </td>
@@ -232,13 +232,13 @@ export default function Index() {
                     <td className="px-4 py-4 font-medium text-foreground">Ménage & maintenance</td>
                     <td className="px-4 py-4 text-foreground">
                       <span className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        <Check className="h-4 w-4 text-[hsl(var(--success))] shrink-0 mt-0.5" />
                         Inclus
                       </span>
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         À organiser et financer
                       </span>
                     </td>
@@ -253,7 +253,7 @@ export default function Index() {
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         Multiples démarches à gérer
                       </span>
                     </td>
@@ -268,7 +268,7 @@ export default function Index() {
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         Minimum 3 ans fermes, pénalités
                       </span>
                     </td>
@@ -283,7 +283,7 @@ export default function Index() {
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         Extras et imprévus possibles
                       </span>
                     </td>
@@ -298,7 +298,7 @@ export default function Index() {
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         Espace vide, aucun service
                       </span>
                     </td>
