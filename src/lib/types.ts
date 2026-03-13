@@ -76,7 +76,7 @@ export const DUREES = ['Sans engagement', '1 mois', '3 mois', '6 mois', '1 an'] 
 export const PREAVIS = ['1 mois', '3 mois'] as const;
 
 export const BAILS = [
-  'Contrat de co-working',
+  'Contrat de prestation',
   'Bail commercial 3-6-9',
   'Convention d\'occupation précaire',
   'Autre',
