@@ -49,6 +49,12 @@ export default function PublicHeader() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-2 text-lavender">
+            <span className="font-medium text-primary-foreground">{OWNER.name}</span>
+            <a href={OWNER.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
+              <Linkedin className="h-4 w-4" />
+            </a>
+          </div>
           <a href={`mailto:${OWNER.email}`} className="flex items-center gap-1.5 text-lavender hover:text-gold transition-colors">
             <Mail className="h-4 w-4" /> {OWNER.email}
           </a>
