@@ -30,7 +30,7 @@ interface Hypotheses {
 const DEFAULTS: Hypotheses = {
   loyerM2An: 150,
   taxeFonciereM2: 1.75,
-  chargesM2: 1.75,
+  chargesM2: 1,
   energieM2: 3.5,
   internet: 50,
   mobilierPoste: 2000,
