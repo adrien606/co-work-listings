@@ -10,4 +10,5 @@ export const OWNER = {
   email: "adrien@belaircamp.org",
   phone: "06 07 60 99 77",
   linkedin: "https://fr.linkedin.com/in/adrien-rippe",
+  agenda: "https://meetings-eu1.hubspot.com/arippe?uuid=9d2fc18e-273d-4e71-bb10-dd905e0749d5",
 } as const;

@@ -1,5 +1,5 @@
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, ExternalLink, Linkedin } from "lucide-react";
+import { Mail, Phone, ExternalLink, Linkedin, Calendar } from "lucide-react";
 import logoBelaircamp from "@/assets/logo-belaircamp.png";
 
 export default function PublicFooter() {
@@ -25,6 +25,9 @@ export default function PublicFooter() {
               </a>
               <a href={OWNER.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
                 <Linkedin className="h-4 w-4" /> LinkedIn
+              </a>
+              <a href={OWNER.agenda} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
+                <Calendar className="h-4 w-4" /> Prendre rendez-vous
               </a>
             </div>
           </div>

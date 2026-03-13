@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, Menu, X, ExternalLink, Linkedin } from "lucide-react";
+import { Mail, Phone, Menu, X, ExternalLink, Linkedin, Calendar } from "lucide-react";
 import logoBelaircamp from "@/assets/logo-belaircamp.png";
 import { useState } from "react";
 
@@ -12,6 +12,7 @@ export default function PublicHeader() {
     { to: "/", label: "Catalogue" },
     { to: "/a-propos", label: "À propos" },
     { to: "https://belaircamp.org", label: "belaircamp.org", external: true },
+    { to: OWNER.agenda, label: "Prendre RDV", external: true, cta: true },
   ];
 
   return (
@@ -30,9 +31,14 @@ export default function PublicHeader() {
                 href={l.to}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-sm font-medium text-lavender hover:text-gold transition-colors"
+                className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                  l.cta
+                    ? "bg-accent text-accent-foreground px-4 py-2 rounded-lg hover:bg-accent/90"
+                    : "text-lavender hover:text-gold"
+                }`}
               >
-                {l.label} <ExternalLink className="h-3 w-3" />
+                {l.cta && <Calendar className="h-4 w-4" />}
+                {l.label} {!l.cta && <ExternalLink className="h-3 w-3" />}
               </a>
             ) : (
               <Link
@@ -74,8 +80,9 @@ export default function PublicHeader() {
           <nav className="container flex flex-col gap-3 pt-3">
             {links.map((l) =>
               l.external ? (
-                <a key={l.to} href={l.to} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1 flex items-center gap-1">
-                  {l.label} <ExternalLink className="h-3 w-3" />
+                <a key={l.to} href={l.to} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className={`text-lavender hover:text-gold py-1 flex items-center gap-1 ${l.cta ? "font-medium" : ""}`}>
+                  {l.cta && <Calendar className="h-4 w-4" />}
+                  {l.label} {!l.cta && <ExternalLink className="h-3 w-3" />}
                 </a>
               ) : (
                 <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1">

@@ -2,7 +2,7 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import { usePageContent, useBatiments } from "@/hooks/useAnnonces";
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, Building2, Ruler, LayoutGrid, Users, Briefcase, HelpCircle, Linkedin } from "lucide-react";
+import { Mail, Phone, Building2, Ruler, LayoutGrid, Users, Briefcase, HelpCircle, Linkedin, Calendar } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
