@@ -401,8 +401,55 @@ export default function AnnonceDetail() {
           </div>
         </div>
       </div>
+      {/* Lightbox */}
+      {photos.length > 0 && (
+        <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+          <DialogContent className="max-w-[95vw] max-h-[95vh] w-auto h-auto p-0 border-none bg-transparent shadow-none [&>button]:hidden">
+            <div className="relative flex items-center justify-center">
+              <img
+                src={photos[selectedPhoto]?.url}
+                alt={annonce.titre}
+                className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg"
+              />
+              <button
+                onClick={() => setLightboxOpen(false)}
+                className="absolute top-2 right-2 bg-primary/80 text-primary-foreground rounded-full p-2 hover:bg-primary transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              {photos.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setSelectedPhoto((prev) => (prev - 1 + photos.length) % photos.length)}
+                    className="absolute left-2 bg-primary/80 text-primary-foreground rounded-full p-2 hover:bg-primary transition-colors"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={() => setSelectedPhoto((prev) => (prev + 1) % photos.length)}
+                    className="absolute right-2 bg-primary/80 text-primary-foreground rounded-full p-2 hover:bg-primary transition-colors"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </>
+              )}
+            </div>
+            {photos.length > 1 && (
+              <div className="flex justify-center gap-1.5 mt-2">
+                {photos.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setSelectedPhoto(i)}
+                    className={`w-2 h-2 rounded-full transition-colors ${i === selectedPhoto ? "bg-accent" : "bg-primary-foreground/40"}`}
+                  />
+                ))}
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+      )}
 
-      <PublicFooter />
+
     </div>
   );
 }
