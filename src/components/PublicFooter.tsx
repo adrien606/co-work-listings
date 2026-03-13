@@ -1,5 +1,5 @@
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, ExternalLink } from "lucide-react";
+import { Mail, Phone, ExternalLink, Linkedin } from "lucide-react";
 import logoBelaircamp from "@/assets/logo-belaircamp.png";
 
 export default function PublicFooter() {
