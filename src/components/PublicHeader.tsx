@@ -84,7 +84,12 @@ export default function PublicHeader() {
               )
             )}
             <div className="flex flex-col gap-2 text-sm text-lavender pt-2 border-t border-sidebar-border">
-              <span className="text-primary-foreground font-medium">{OWNER.name}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-primary-foreground font-medium">{OWNER.name}</span>
+                <a href={OWNER.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </div>
               <a href={`mailto:${OWNER.email}`} className="hover:text-gold">{OWNER.email}</a>
               <a href={`tel:${OWNER.phone.replace(/\s/g, "")}`} className="hover:text-gold">{OWNER.phone}</a>
             </div>
