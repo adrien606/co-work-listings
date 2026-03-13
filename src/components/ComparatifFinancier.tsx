@@ -14,7 +14,7 @@ function fmtEur(n: number) {
 interface Hypotheses {
   loyerM2An: number;       // €/m²/an (défaut 150)
   taxeFonciereM2: number;  // €/m²/mois (défaut 1.75)
-  chargesM2: number;       // €/m²/mois (défaut 1.75)
+  chargesM2An: number;     // €/m²/an (défaut 20)
   energieM2: number;       // €/m²/mois (défaut 3.50)
   internet: number;        // €/mois fixe (défaut 50)
   mobilierPoste: number;   // €/poste achat (défaut 2000)
