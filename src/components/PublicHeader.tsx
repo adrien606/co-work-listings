@@ -11,6 +11,7 @@ export default function PublicHeader() {
   const links = [
     { to: "/", label: "Catalogue" },
     { to: "/a-propos", label: "À propos" },
+    { to: "https://belaircamp.org", label: "belaircamp.org", external: true },
   ];
 
   return (
