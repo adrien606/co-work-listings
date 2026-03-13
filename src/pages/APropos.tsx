@@ -85,6 +85,24 @@ export default function APropos() {
                 </div>
               ))}
             </div>
+            
+            <div className="mt-12 max-w-4xl mx-auto bg-sidebar-accent/50 rounded-lg p-8">
+              <p className="text-lavender text-base leading-relaxed mb-6">
+                Ce qui fait vraiment la différence chez Bel Air Camp, c'est l'effet réseau.
+              </p>
+              <p className="text-lavender text-sm leading-relaxed mb-4">
+                Les rencontres ne sont pas théoriques : elles débouchent sur des collaborations concrètes. Un expert en électronique qui dépanne un voisin menuisier, des recommandations entre dirigeants, des partenariats qui naissent autour d'un projet commun. Avec plus de 250 entreprises sur le campus, chaque voisin peut devenir un partenaire, un fournisseur — ou un client.
+              </p>
+              <p className="text-lavender text-sm leading-relaxed mb-4">
+                Mais l'enjeu va au-delà du réseau. Pour un dirigeant, regrouper bureaux, production et formation au même endroit, c'est simplifier son organisation, fluidifier les échanges et accélérer les décisions. Quand le bureau est à quelques mètres de l'atelier, on gagne en réactivité et on se recentre sur l'essentiel : la stratégie et le développement.
+              </p>
+              <p className="text-lavender text-sm leading-relaxed mb-4">
+                C'est aussi un choix financier structurant. Passer de l'immobilisation à la charge, c'est alléger le bilan, réduire le CAPEX et gagner en flexibilité à mesure que l'activité évolue.
+              </p>
+              <p className="text-lavender text-sm leading-relaxed">
+                Pour aller plus loin, l'équipe propose un échange personnalisé sur vos besoins : surfaces, organisation, perspectives de croissance. L'objectif est simple — repartir avec un plan d'implantation clair, aligné avec votre activité et vos ambitions.
+              </p>
+            </div>
           </div>
         </section>
       )}
