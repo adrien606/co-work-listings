@@ -174,7 +174,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
         <SliderRow label="Ménage" value={hyp.menageM2} min={2} max={15} step={0.5} unit="€/m²/mois" onChange={update("menageM2")} />
         <SliderRow label="Assurance locaux" value={hyp.assuranceM2} min={0.5} max={4} step={0.25} unit="€/m²/mois" onChange={update("assuranceM2")} />
         <SliderRow label="Franchise de loyer" value={hyp.franchiseMois} min={0} max={6} step={1} unit="mois" onChange={update("franchiseMois")} />
-        <SliderRow label="Coeff. surface accessible (prestation uniquement)" value={hyp.coeffSurface} min={2} max={6} step={0.5} unit="×" onChange={update("coeffSurface")} />
+        
       </div>
     </div>
   );
