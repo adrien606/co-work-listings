@@ -363,7 +363,7 @@ export default function AnnonceDetail() {
                     onClick={handleShare}
                     className="flex-1 flex items-center justify-center gap-2 bg-lavender text-secondary-foreground font-medium py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm"
                   >
-                    <Share2 className="h-4 w-4" /> Partager
+                    <Mail className="h-4 w-4" /> Envoyer
                   </button>
                   <button
                     onClick={handleDownloadPDF}
