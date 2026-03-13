@@ -14,7 +14,7 @@ function fmtEur(n: number) {
 interface Hypotheses {
   loyerM2An: number;       // €/m²/an (défaut 150)
   taxeFonciereM2: number;  // €/m²/mois (défaut 1.75)
-  chargesM2: number;       // €/m²/mois (défaut 1.75)
+  chargesM2An: number;     // €/m²/an (défaut 20)
   energieM2: number;       // €/m²/mois (défaut 3.50)
   internet: number;        // €/mois fixe (défaut 50)
   mobilierPoste: number;   // €/poste achat (défaut 2000)
@@ -30,7 +30,7 @@ interface Hypotheses {
 const DEFAULTS: Hypotheses = {
   loyerM2An: 150,
   taxeFonciereM2: 1.75,
-  chargesM2: 1.75,
+  chargesM2An: 20,
   energieM2: 3.5,
   internet: 50,
   mobilierPoste: 2000,
@@ -84,7 +84,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   // Bail classique
   const loyer = surfaceM2 * (hyp.loyerM2An / 12);
   const taxeFonciere = surfaceM2 * hyp.taxeFonciereM2;
-  const charges = surfaceM2 * hyp.chargesM2;
+  const charges = surfaceM2 * (hyp.chargesM2An / 12);
   const electricite = surfaceM2 * hyp.energieM2;
   const internet = hyp.internet;
   const mobilierMensuel = postes * (hyp.mobilierPoste / 36);
@@ -165,7 +165,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
         <SliderRow label="Loyer marché" value={hyp.loyerM2An} min={80} max={300} step={5} unit="€/m²/an" onChange={update("loyerM2An")} />
         <SliderRow label="m² par poste" value={hyp.m2ParPoste} min={3} max={10} step={1} unit="m²" onChange={update("m2ParPoste")} />
         <SliderRow label="Taxe foncière" value={hyp.taxeFonciereM2} min={0.5} max={5} step={0.25} unit="€/m²/mois" onChange={update("taxeFonciereM2")} />
-        <SliderRow label="Charges locatives" value={hyp.chargesM2} min={0.5} max={5} step={0.25} unit="€/m²/mois" onChange={update("chargesM2")} />
+        <SliderRow label="Charges locatives" value={hyp.chargesM2An} min={5} max={50} step={1} unit="€/m²/an" onChange={update("chargesM2An")} />
         <SliderRow label="Énergie (élec, eau, chauff.)" value={hyp.energieM2} min={1} max={8} step={0.5} unit="€/m²/mois" onChange={update("energieM2")} />
         <SliderRow label="Internet fibre" value={hyp.internet} min={20} max={150} step={5} unit="€/mois" onChange={update("internet")} />
         <SliderRow label="Mobilier par poste" value={hyp.mobilierPoste} min={500} max={5000} step={100} unit="€ (achat)" onChange={update("mobilierPoste")} />
