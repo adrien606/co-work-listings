@@ -23,17 +23,29 @@ export default function PublicHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className={`text-sm font-medium transition-colors ${
-                location.pathname === l.to ? "text-gold" : "text-lavender hover:text-primary-foreground"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) =>
+            l.external ? (
+              <a
+                key={l.to}
+                href={l.to}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-sm font-medium text-lavender hover:text-gold transition-colors"
+              >
+                {l.label} <ExternalLink className="h-3 w-3" />
+              </a>
+            ) : (
+              <Link
+                key={l.to}
+                to={l.to}
+                className={`text-sm font-medium transition-colors ${
+                  location.pathname === l.to ? "text-gold" : "text-lavender hover:text-primary-foreground"
+                }`}
+              >
+                {l.label}
+              </Link>
+            )
+          )}
         </nav>
 
         <div className="hidden md:flex items-center gap-4 text-sm">
