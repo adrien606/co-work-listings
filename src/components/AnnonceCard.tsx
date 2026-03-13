@@ -23,9 +23,9 @@ export default function AnnonceCard({ annonce }: Props) {
             <Maximize2 className="h-12 w-12" />
           </div>
         )}
-        {annonce.disponibilite === "Disponible immédiatement" && (
+        {annonce.conditions_bail && (
           <span className="absolute top-3 left-3 bg-gold text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">
-            Disponible
+            {annonce.conditions_bail}
           </span>
         )}
         <span className="absolute top-3 right-3 bg-lavender text-secondary-foreground text-xs font-medium px-3 py-1 rounded-full">
