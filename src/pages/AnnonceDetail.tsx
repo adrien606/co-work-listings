@@ -300,6 +300,11 @@ export default function AnnonceDetail() {
                 </div>
               )}
 
+              {/* Comparatif financier */}
+              {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
+                <ComparatifFinancier prixPrestation={annonce.prix_mensuel} surfaceM2={annonce.surface} />
+              )}
+
               {/* Carte */}
               {annonce.batiment?.adresse && (
                 <div className="mt-8">
