@@ -62,16 +62,18 @@ export default function AnnonceDetail() {
     doc.setFontSize(12);
     let y = 55;
 
+    const fmtNum = (n: number) => n.toLocaleString("fr-FR").replace(/\u202f/g, " ").replace(/\u00a0/g, " ");
+
     doc.setFontSize(16);
     doc.setTextColor(255, 205, 84);
-    doc.text(`${annonce.prix_mensuel?.toLocaleString("fr-FR")} €/mois`, 15, y);
+    doc.text(`${annonce.prix_mensuel ? fmtNum(annonce.prix_mensuel) : "—"} EUR/mois`, 15, y);
     y += 10;
 
     doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
-    doc.text(`Surface : ${annonce.surface} m²`, 15, y); y += 6;
-    if (pm2m) { doc.text(`Prix/m²/mois : ${pm2m.toLocaleString("fr-FR")} €`, 15, y); y += 6; }
-    if (pm2a) { doc.text(`Prix/m²/an : ${pm2a.toLocaleString("fr-FR")} €`, 15, y); y += 6; }
+    doc.text(`Surface : ${annonce.surface} m2`, 15, y); y += 6;
+    if (pm2m) { doc.text(`Prix/m2/mois : ${fmtNum(pm2m)} EUR`, 15, y); y += 6; }
+    if (pm2a) { doc.text(`Prix/m2/an : ${fmtNum(pm2a)} EUR`, 15, y); y += 6; }
     doc.text(`Type : ${annonce.type_espace}`, 15, y); y += 6;
     doc.text(`Charges : ${annonce.charges || "Non précisé"}`, 15, y); y += 6;
     doc.text(`Disponibilité : ${annonce.disponibilite || "Non précisé"}`, 15, y); y += 10;
