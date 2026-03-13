@@ -139,7 +139,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
     { label: "Total mensuel réel", bail: `${fmtEur(totalBail)} €/mois`, presta: `${fmtEur(prixPrestation)} €/mois` },
     { label: "Coût par poste", bail: `${fmtEur(coutParPosteBail)} €`, presta: `${fmtEur(coutParPostePrestation)} €` },
     { label: "Coût au m² accessible", bail: `${fmtEur(coutM2Bail)} €/m²`, presta: `${fmtEur(coutM2Prestation)} €/m²` },
-    { label: "Frais d'entrée", bail: `~${fmtEur(fraisEntreeBail)} €`, presta: `${fmtEur(fraisEntreePrestation)} €` },
+    { label: "Frais d'entrée", bail: `~${fmtEur(fraisEntreeBail)} € (caution + dépôt de garantie + mobilier + installation)`, presta: "Aucun" },
     { label: "Engagement minimum", bail: "3 ans", presta: "1 mois" },
     { label: "Préavis de sortie", bail: "6 mois", presta: "1 mois" },
     ...(hyp.franchiseMois > 0 ? [{ label: "Franchise déduite", bail: `-${fmtEur(franchiseEconomie)} €`, presta: "—" }] : []),
