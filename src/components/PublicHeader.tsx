@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, Menu, X, ExternalLink, Linkedin } from "lucide-react";
+import { Mail, Phone, Menu, X, ExternalLink, Linkedin, Calendar } from "lucide-react";
 import logoBelaircamp from "@/assets/logo-belaircamp.png";
 import { useState } from "react";
 
