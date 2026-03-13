@@ -25,6 +25,7 @@ interface Hypotheses {
   assuranceM2: number;     // €/m²/mois (défaut 1.25)
   m2ParPoste: number;      // m² par poste (défaut 5)
   coeffSurface: number;    // multiplicateur surface accessible (défaut 4)
+  franchiseMois: number;   // mois de franchise de loyer (défaut 0)
 }
 
 const DEFAULTS: Hypotheses = {
