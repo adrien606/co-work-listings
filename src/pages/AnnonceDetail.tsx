@@ -508,7 +508,7 @@ export default function AnnonceDetail() {
                       </div>
                     )}
                   </div>
-                  {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
+                  {annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.prix_mensuel && annonce.surface && (
                     <a
                       href="#comparatif-bail"
                       className="mt-4 w-full flex items-center justify-center gap-2 bg-gold text-primary font-medium py-2 rounded-lg hover:opacity-90 transition-opacity text-sm"
