@@ -84,7 +84,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   // Bail classique
   const loyer = surfaceM2 * (hyp.loyerM2An / 12);
   const taxeFonciere = surfaceM2 * hyp.taxeFonciereM2;
-  const charges = surfaceM2 * (hyp.chargesM2An / 12);
+  const charges = surfaceM2 * ((hyp.chargesM2An ?? 20) / 12);
   const electricite = surfaceM2 * hyp.energieM2;
   const internet = hyp.internet;
   const mobilierMensuel = postes * (hyp.mobilierPoste / 36);
