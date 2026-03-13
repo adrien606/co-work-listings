@@ -377,6 +377,40 @@ export default function AnnonceDetail() {
                     <Download className="h-4 w-4" /> Fiche PDF
                   </button>
                 </div>
+                <button
+                  onClick={() => {
+                    const today = new Date().toLocaleDateString("fr-FR");
+                    const adresse = annonce.batiment?.adresse || "adresse non renseignée";
+                    const subject = encodeURIComponent(`Dénonce de visite — ${annonce.titre}`);
+                    const body = encodeURIComponent(
+`Monsieur,
+
+Nous avons le plaisir de vous informer que nous avons visité le bâtiment sis "${adresse}", le "${today}" à la société suivante :
+
+La société :
+
+Représentée par :
+
+Activité :
+
+Nous ne manquerons pas de vous tenir informé de la suite de cette visite.
+
+Le nom de ce client vous est communiqué à titre confidentiel et ne doit pas être transmis à des tiers.
+
+Si vous même ou vos services étaient directement contactés par ce client, nous vous serions reconnaissants de bien vouloir nous en aviser aussitôt.
+
+Nous vous remercions de votre confiance et vous prions de croire, Monsieur, à l'assurance de nos sentiments les meilleurs.
+
+Restant à votre disposition,
+
+Bien cordialement,`
+                    );
+                    window.location.href = `mailto:adrien@belaircamp.org?subject=${subject}&body=${body}`;
+                  }}
+                  className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-medium py-2.5 rounded-lg hover:bg-primary/90 transition-colors text-sm mb-6"
+                >
+                  <FileText className="h-4 w-4" /> Faire une dénonce
+                </button>
 
                 <div className="border-t pt-5">
                   <h3 className="font-heading font-semibold mb-3">Contact</h3>
