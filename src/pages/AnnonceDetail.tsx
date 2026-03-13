@@ -98,7 +98,10 @@ export default function AnnonceDetail() {
       doc.text("Services inclus", 15, y); y += 6;
       doc.setFontSize(9);
       doc.setTextColor(80, 80, 80);
-      doc.text(annonce.services.map((s) => `${s.icone} ${s.nom}`).join(" • "), 15, y); y += 10;
+      annonce.services.forEach((s) => {
+        doc.text(`- ${s.nom}`, 15, y); y += 5;
+      });
+      y += 5;
     }
 
     if (annonce.conditions_duree || annonce.conditions_bail) {
