@@ -13,6 +13,7 @@ export default function AnnonceDetail() {
   const { id } = useParams<{ id: string }>();
   const { data: annonce, isLoading } = useAnnonce(id!);
   const [selectedPhoto, setSelectedPhoto] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   if (isLoading) {
     return (
