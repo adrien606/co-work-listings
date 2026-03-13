@@ -46,6 +46,9 @@ export default function Index() {
           <p className="text-lavender text-lg md:text-xl max-w-2xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
             Co-working, bureaux privatifs, ateliers et salles de formation — des espaces flexibles adaptés à vos besoins.
           </p>
+          <p className="text-lavender/80 text-sm md:text-base max-w-3xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: "0.15s" }}>
+            Acheter ou aménager ses propres locaux, c'est du CAPEX : un investissement lourd, figé, qui pèse sur le bilan et mobilise du capital. Bel Air Camp propose une alternative OPEX : vous payez l'espace que vous utilisez, quand vous en avez besoin, sans engagement long terme. Pour une PME en croissance, c'est une décision de trésorerie autant qu'une décision stratégique.
+          </p>
           <div className="flex justify-center animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <button
               onClick={() => {
