@@ -117,18 +117,54 @@ export default function AnnonceDetail() {
       y += 5;
     }
 
-    // Contact footer
+    // Photos
+    if (photos.length > 0) {
+      const loadImage = (url: string): Promise<HTMLImageElement> =>
+        new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = url;
+        });
+
+      for (const photo of photos) {
+        try {
+          const img = await loadImage(photo.url);
+          doc.addPage();
+          const pageW = 210;
+          const pageH = 297;
+          const ratio = Math.min((pageW - 20) / img.width, (pageH - 20) / img.height);
+          const w = img.width * ratio;
+          const h = img.height * ratio;
+          const x = (pageW - w) / 2;
+          const yImg = (pageH - h) / 2;
+
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          canvas.getContext("2d")!.drawImage(img, 0, 0);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+
+          doc.addImage(dataUrl, "JPEG", x, yImg, w, h);
+        } catch {
+          // skip photo on error
+        }
+      }
+    }
+
+    // Contact footer on last page
     doc.setFillColor(29, 29, 86);
     doc.rect(0, 270, 210, 27, "F");
     doc.setTextColor(255, 205, 84);
     doc.setFontSize(11);
-    doc.text(`${OWNER.name} — ${OWNER.email} — ${OWNER.phone}`, 15, 282);
+    doc.text(`${OWNER.name} - ${OWNER.email} - ${OWNER.phone}`, 15, 282);
     doc.setTextColor(187, 184, 255);
     doc.setFontSize(8);
     doc.text(window.location.href, 15, 289);
 
     doc.save(`${annonce.titre.replace(/[^a-zA-Z0-9]/g, "_")}.pdf`);
-    toast.success("PDF téléchargé !");
+    toast.success("PDF telecharge !");
   };
 
   return (
