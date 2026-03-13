@@ -4,8 +4,9 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import { OWNER } from "@/lib/supabase";
 import { prixM2Mois, prixM2An } from "@/lib/types";
-import { ArrowLeft, Share2, Download, Mail, Phone, MapPin, Calendar, FileText, CheckCircle, Linkedin } from "lucide-react";
+import { ArrowLeft, Share2, Download, Mail, Phone, MapPin, Calendar, FileText, CheckCircle, Linkedin, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
 export default function AnnonceDetail() {
