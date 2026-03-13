@@ -96,7 +96,9 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   const totalBail = loyer + taxeFonciere + charges + electricite + internet + mobilierMensuel + installationMensuel + gestionTech + menage + assurance;
   const coutParPosteBail = totalBail / postes;
   const coutM2Bail = totalBail / surfaceM2;
-  const fraisEntreeBail = (loyer * 3) + loyer + (postes * hyp.mobilierPoste) + (surfaceM2 * hyp.installationM2);
+  const cautionBail = loyer * 3;
+  const depotGarantieBail = loyer;
+  const fraisEntreeBail = cautionBail + depotGarantieBail + (postes * hyp.mobilierPoste) + (surfaceM2 * hyp.installationM2);
   const franchiseEconomie = loyer * hyp.franchiseMois;
   const coutTotal3ansBail = fraisEntreeBail + (totalBail * 36) - franchiseEconomie;
 
