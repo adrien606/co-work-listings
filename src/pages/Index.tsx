@@ -9,6 +9,8 @@ export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
   const [filtreContrat, setFiltreContrat] = useState("");
   const [filtreType, setFiltreType] = useState("");
+  const [filtreSurface, setFiltreSurface] = useState("");
+  const [filtrePrix, setFiltrePrix] = useState("");
 
   // Types de contrat disponibles (extraits des données)
   const typesContrat = useMemo(() => {
@@ -30,9 +32,15 @@ export default function Index() {
     return annonces.filter((a) => {
       if (filtreContrat && a.conditions_bail !== filtreContrat) return false;
       if (filtreType && a.type_espace !== filtreType) return false;
+      if (filtreSurface === "small" && (a.surface || 0) >= 50) return false;
+      if (filtreSurface === "large" && (a.surface || 0) < 50) return false;
+      if (filtrePrix === "p1" && (a.prix_mensuel || 0) >= 500) return false;
+      if (filtrePrix === "p2" && ((a.prix_mensuel || 0) < 500 || (a.prix_mensuel || 0) >= 1000)) return false;
+      if (filtrePrix === "p3" && ((a.prix_mensuel || 0) < 1000 || (a.prix_mensuel || 0) >= 2000)) return false;
+      if (filtrePrix === "p4" && (a.prix_mensuel || 0) < 2000) return false;
       return true;
     });
-  }, [annonces, filtreContrat, filtreType]);
+  }, [annonces, filtreContrat, filtreType, filtreSurface, filtrePrix]);
 
   // Grouper par type de contrat, puis par type de produit
   const grouped = useMemo(() => {
@@ -107,9 +115,35 @@ export default function Index() {
                 ))}
               </select>
             </div>
+            <div className="flex-1 w-full">
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Surface</label>
+              <select
+                value={filtreSurface}
+                onChange={(e) => setFiltreSurface(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
+              >
+                <option value="">Toutes surfaces</option>
+                <option value="small">Moins de 50 m²</option>
+                <option value="large">Plus de 50 m²</option>
+              </select>
+            </div>
+            <div className="flex-1 w-full">
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Prix mensuel</label>
+              <select
+                value={filtrePrix}
+                onChange={(e) => setFiltrePrix(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
+              >
+                <option value="">Tous les prix</option>
+                <option value="p1">Moins de 500 €</option>
+                <option value="p2">500 – 1 000 €</option>
+                <option value="p3">1 000 – 2 000 €</option>
+                <option value="p4">Plus de 2 000 €</option>
+              </select>
+            </div>
             <button
-              onClick={() => { setFiltreContrat(""); setFiltreType(""); }}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 pb-1"
+              onClick={() => { setFiltreContrat(""); setFiltreType(""); setFiltreSurface(""); setFiltrePrix(""); }}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 pb-1 whitespace-nowrap"
             >
               Réinitialiser
             </button>
