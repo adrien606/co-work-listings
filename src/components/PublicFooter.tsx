@@ -1,5 +1,5 @@
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, ExternalLink } from "lucide-react";
 import logoBelaircamp from "@/assets/logo-belaircamp.png";
 
 export default function PublicFooter() {
@@ -30,6 +30,9 @@ export default function PublicFooter() {
             <div className="flex flex-col gap-2 text-sm text-lavender">
               <a href="/" className="hover:text-gold transition-colors">Catalogue</a>
               <a href="/a-propos" className="hover:text-gold transition-colors">À propos</a>
+              <a href="https://belaircamp.org" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-gold transition-colors">
+                belaircamp.org <ExternalLink className="h-3 w-3" />
+              </a>
             </div>
           </div>
         </div>

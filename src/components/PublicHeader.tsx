@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, Menu, X } from "lucide-react";
+import { Mail, Phone, Menu, X, ExternalLink } from "lucide-react";
 import logoBelaircamp from "@/assets/logo-belaircamp.png";
 import { useState } from "react";
 
@@ -11,6 +11,7 @@ export default function PublicHeader() {
   const links = [
     { to: "/", label: "Catalogue" },
     { to: "/a-propos", label: "À propos" },
+    { to: "https://belaircamp.org", label: "belaircamp.org", external: true },
   ];
 
   return (
@@ -22,17 +23,29 @@ export default function PublicHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className={`text-sm font-medium transition-colors ${
-                location.pathname === l.to ? "text-gold" : "text-lavender hover:text-primary-foreground"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) =>
+            l.external ? (
+              <a
+                key={l.to}
+                href={l.to}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-sm font-medium text-lavender hover:text-gold transition-colors"
+              >
+                {l.label} <ExternalLink className="h-3 w-3" />
+              </a>
+            ) : (
+              <Link
+                key={l.to}
+                to={l.to}
+                className={`text-sm font-medium transition-colors ${
+                  location.pathname === l.to ? "text-gold" : "text-lavender hover:text-primary-foreground"
+                }`}
+              >
+                {l.label}
+              </Link>
+            )
+          )}
         </nav>
 
         <div className="hidden md:flex items-center gap-4 text-sm">
@@ -53,11 +66,17 @@ export default function PublicHeader() {
       {open && (
         <div className="md:hidden bg-primary border-t border-sidebar-border pb-4">
           <nav className="container flex flex-col gap-3 pt-3">
-            {links.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1">
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) =>
+              l.external ? (
+                <a key={l.to} href={l.to} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1 flex items-center gap-1">
+                  {l.label} <ExternalLink className="h-3 w-3" />
+                </a>
+              ) : (
+                <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1">
+                  {l.label}
+                </Link>
+              )
+            )}
             <div className="flex flex-col gap-2 text-sm text-lavender pt-2 border-t border-sidebar-border">
               <span className="text-primary-foreground font-medium">{OWNER.name}</span>
               <a href={`mailto:${OWNER.email}`} className="hover:text-gold">{OWNER.email}</a>
