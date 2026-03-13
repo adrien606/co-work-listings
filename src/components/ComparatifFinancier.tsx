@@ -134,7 +134,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   ];
 
   const syntheseRows = [
-    { label: "Surface accessible", bail: `${fmtEur(surfaceM2)} m²`, presta: `~${fmtEur(surfaceAccessible)} m²` },
+    { label: "Surface accessible (bureau privé + espaces partagés)", bail: `${fmtEur(surfaceM2)} m²`, presta: `~${fmtEur(surfaceAccessible)} m²` },
     { label: "Total mensuel réel", bail: `${fmtEur(totalBail)} €/mois`, presta: `${fmtEur(prixPrestation)} €/mois` },
     { label: "Coût par poste", bail: `${fmtEur(coutParPosteBail)} €`, presta: `${fmtEur(coutParPostePrestation)} €` },
     { label: "Coût au m² accessible", bail: "—", presta: `${fmtEur(coutM2Prestation)} €/m²` },
