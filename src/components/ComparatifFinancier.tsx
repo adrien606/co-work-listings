@@ -25,6 +25,7 @@ interface Hypotheses {
   assuranceM2: number;     // €/m²/mois (défaut 1.25)
   m2ParPoste: number;      // m² par poste (défaut 5)
   coeffSurface: number;    // multiplicateur surface accessible (défaut 4)
+  franchiseMois: number;   // mois de franchise de loyer (défaut 0)
 }
 
 const DEFAULTS: Hypotheses = {
@@ -40,6 +41,7 @@ const DEFAULTS: Hypotheses = {
   assuranceM2: 1.25,
   m2ParPoste: 5,
   coeffSurface: 4,
+  franchiseMois: 0,
 };
 
 interface SliderRowProps {
@@ -97,7 +99,8 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   const coutParPosteBail = totalBail / postes;
   const coutM2Bail = totalBail / surfaceM2;
   const fraisEntreeBail = (loyer * 3) + loyer + (postes * hyp.mobilierPoste) + (surfaceM2 * hyp.installationM2);
-  const coutTotal3ansBail = fraisEntreeBail + (totalBail * 36);
+  const franchiseEconomie = loyer * hyp.franchiseMois;
+  const coutTotal3ansBail = fraisEntreeBail + (totalBail * 36) - franchiseEconomie;
 
   // Prestation
   const surfaceAccessible = surfaceM2 * hyp.coeffSurface;
@@ -125,6 +128,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   ];
 
   const sharedRows = [
+    { label: "Franchise de loyer possible", bail: hyp.franchiseMois > 0 ? `⚠️ ${hyp.franchiseMois} mois (contre engagement 3-6 ans ferme)` : "⚠️ 0 mois (ajustable)", presta: "Aucun engagement requis" },
     { label: "Cuisine équipée / détente", bail: "❌ à aménager", presta: "✅ accès libre" },
     { label: "Salles de réunion", bail: "❌ externe ~50 €/h", presta: "✅ sur réservation" },
     { label: "Phone box / cabine acoustique", bail: "❌ non disponible", presta: "✅ accès libre" },
@@ -139,6 +143,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
     { label: "Frais d'entrée", bail: `~${fmtEur(fraisEntreeBail)} €`, presta: `${fmtEur(fraisEntreePrestation)} €` },
     { label: "Engagement minimum", bail: "3 ans", presta: "1 mois" },
     { label: "Préavis de sortie", bail: "6 mois", presta: "1 mois" },
+    ...(hyp.franchiseMois > 0 ? [{ label: "Franchise déduite", bail: `-${fmtEur(franchiseEconomie)} €`, presta: "—" }] : []),
     { label: "Coût total sur 3 ans", bail: `${fmtEur(coutTotal3ansBail)} €`, presta: `${fmtEur(coutTotal3ansPrestation)} €` },
   ];
 
@@ -170,6 +175,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
         <SliderRow label="Gestion technique" value={hyp.gestionTechM2} min={0.5} max={5} step={0.25} unit="€/m²/mois" onChange={update("gestionTechM2")} />
         <SliderRow label="Ménage" value={hyp.menageM2} min={2} max={15} step={0.5} unit="€/m²/mois" onChange={update("menageM2")} />
         <SliderRow label="Assurance locaux" value={hyp.assuranceM2} min={0.5} max={4} step={0.25} unit="€/m²/mois" onChange={update("assuranceM2")} />
+        <SliderRow label="Franchise de loyer" value={hyp.franchiseMois} min={0} max={6} step={1} unit="mois" onChange={update("franchiseMois")} />
         <SliderRow label="Coeff. surface accessible" value={hyp.coeffSurface} min={2} max={6} step={0.5} unit="×" onChange={update("coeffSurface")} />
       </div>
     </div>
