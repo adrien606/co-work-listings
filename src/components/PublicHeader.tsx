@@ -12,6 +12,7 @@ export default function PublicHeader() {
     { to: "/", label: "Catalogue" },
     { to: "/a-propos", label: "À propos" },
     { to: "https://belaircamp.org", label: "belaircamp.org", external: true },
+    { to: OWNER.agenda, label: "Prendre RDV", external: true, cta: true },
   ];
 
   return (
