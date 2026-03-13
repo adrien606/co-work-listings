@@ -120,6 +120,150 @@ export default function AnnonceDetail() {
       y += 5;
     }
 
+    // Comparatif financier (Bureau privatif uniquement)
+    if (annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface) {
+      const surf = annonce.surface;
+      const prix = annonce.prix_mensuel;
+      const m2ParPoste = 5;
+      const postes = Math.floor(surf / m2ParPoste);
+
+      if (postes >= 1) {
+        // Hypothèses par défaut
+        const loyerM2An = 150;
+        const taxeFonciereM2 = 1.75;
+        const chargesM2An = 20;
+        const energieM2 = 3.5;
+        const internet = 50;
+        const mobilierPoste = 2000;
+        const installationM2 = 250;
+        const gestionTechM2 = 2.25;
+        const menageM2 = 8;
+        const assuranceM2 = 1.25;
+        const coeffSurface = 4;
+        const franchiseMois = 1;
+
+        const loyer = surf * (loyerM2An / 12);
+        const taxeFonciere = surf * taxeFonciereM2;
+        const charges = surf * (chargesM2An / 12);
+        const electricite = surf * energieM2;
+        const mobilierMensuel = postes * (mobilierPoste / 36);
+        const installationMensuel = surf * (installationM2 / 36);
+        const gestionTech = surf * gestionTechM2;
+        const menage = surf * menageM2;
+        const assurance = surf * assuranceM2;
+
+        const totalBail = loyer + taxeFonciere + charges + electricite + internet + mobilierMensuel + installationMensuel + gestionTech + menage + assurance;
+        const coutParPosteBail = totalBail / postes;
+        const surfaceAccessible = surf * coeffSurface;
+        const coutParPostePrestation = prix / postes;
+        const coutM2Prestation = prix / surfaceAccessible;
+        const fraisEntreeBail = (loyer * 3) + loyer + (postes * mobilierPoste) + (surf * installationM2);
+        const franchiseEconomie = loyer * franchiseMois;
+        const coutTotal3ansBail = fraisEntreeBail + (totalBail * 36) - franchiseEconomie;
+        const coutTotal3ansPrestation = prix + (prix * 36);
+        const economie3ans = coutTotal3ansBail - coutTotal3ansPrestation;
+        const pourcentageEconomie = Math.round((economie3ans / coutTotal3ansBail) * 100);
+
+        // Nouvelle page pour le comparatif
+        doc.addPage();
+        doc.setFillColor(29, 29, 86);
+        doc.rect(0, 0, 210, 15, "F");
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(13);
+        doc.text("Comparatif : Bail classique vs Contrat de prestation", 15, 10);
+
+        let ty = 25;
+        const col1 = 15;
+        const col2 = 95;
+        const col3 = 155;
+
+        // Header
+        doc.setFontSize(8);
+        doc.setFillColor(240, 240, 240);
+        doc.rect(col2 - 2, ty - 4, 58, 6, "F");
+        doc.setFillColor(220, 252, 231);
+        doc.rect(col3 - 2, ty - 4, 50, 6, "F");
+        doc.setTextColor(180, 60, 60);
+        doc.text("Bail classique", col2, ty);
+        doc.setTextColor(21, 128, 61);
+        doc.text("Contrat prestation", col3, ty);
+        ty += 8;
+
+        // Section title helper
+        const sectionTitle = (title: string) => {
+          doc.setFontSize(8);
+          doc.setTextColor(29, 29, 86);
+          doc.setFont("helvetica", "bold");
+          doc.text(title, col1, ty);
+          doc.setFont("helvetica", "normal");
+          ty += 5;
+        };
+
+        // Row helper
+        const row = (label: string, bail: string, presta: string, bold = false) => {
+          doc.setFontSize(7.5);
+          doc.setTextColor(100, 100, 100);
+          if (bold) { doc.setFont("helvetica", "bold"); doc.setTextColor(29, 29, 86); }
+          doc.text(label, col1, ty);
+          doc.setTextColor(180, 80, 20);
+          if (bold) doc.setFont("helvetica", "bold");
+          doc.text(bail, col2, ty);
+          doc.setTextColor(21, 128, 61);
+          doc.text(presta, col3, ty);
+          doc.setFont("helvetica", "normal");
+          ty += 5;
+        };
+
+        sectionTitle("COUTS MENSUELS DETAILLES");
+        row("Loyer / redevance", `${fmtNum(loyer)} EUR/mois HT`, "--");
+        row("Taxe fonciere", `${fmtNum(taxeFonciere)} EUR`, "incluse");
+        row("Charges locatives", `${fmtNum(charges)} EUR`, "incluses");
+        row("Electricite, eau, chauffage", `${fmtNum(electricite)} EUR`, "inclus");
+        row("Internet fibre pro", `${fmtNum(internet)} EUR`, "inclus");
+        row("Mobilier (amort. 36 mois)", `${fmtNum(mobilierMensuel)} EUR`, "inclus");
+        row("Installation (amort. 36 mois)", `${fmtNum(installationMensuel)} EUR`, "inclus");
+        row("Gestion technique", `${fmtNum(gestionTech)} EUR`, "incluse");
+        row("Menage", `${fmtNum(menage)} EUR`, "inclus");
+        row("Assurance locaux", `${fmtNum(assurance)} EUR`, "incluse");
+        ty += 3;
+
+        sectionTitle("ESPACES PARTAGES INCLUS");
+        row("Cuisine equipee / detente", "a amenager", "acces libre");
+        row("Salles de reunion", "externe ~50 EUR/h", "sur reservation");
+        row("Phone box / cabine acoustique", "non disponible", "acces libre");
+        row("Espace accueil / reception", "non disponible", "inclus");
+        ty += 3;
+
+        sectionTitle("SYNTHESE");
+        row("Surface accessible", `${fmtNum(surf)} m2`, `~${fmtNum(surfaceAccessible)} m2`, true);
+        row("Total mensuel reel", `${fmtNum(totalBail)} EUR/mois`, `${fmtNum(prix)} EUR/mois`, true);
+        row("Cout par poste", `${fmtNum(coutParPosteBail)} EUR`, `${fmtNum(coutParPostePrestation)} EUR`, true);
+        row("Cout au m2 accessible", "--", `${fmtNum(coutM2Prestation)} EUR/m2`, true);
+        row("Frais d'entree", `~${fmtNum(fraisEntreeBail)} EUR`, `${fmtNum(prix)} EUR (caution)`, true);
+        row("Engagement minimum", "3 ans", "12 mois", true);
+        row("Preavis de sortie", "6 mois", "3 mois", true);
+        if (franchiseMois > 0) {
+          row("Franchise deduite", `-${fmtNum(franchiseEconomie)} EUR`, "--", true);
+        }
+        row("Cout total sur 3 ans", `${fmtNum(coutTotal3ansBail)} EUR`, `${fmtNum(coutTotal3ansPrestation)} EUR`, true);
+        ty += 5;
+
+        // Bandeau économie
+        doc.setFillColor(220, 252, 231);
+        doc.roundedRect(col1 - 2, ty - 4, 185, 10, 2, 2, "F");
+        doc.setTextColor(21, 128, 61);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "bold");
+        doc.text(`Economie estimee sur 3 ans : ${fmtNum(economie3ans)} EUR (${pourcentageEconomie} %) -- sans engagement`, col1, ty + 2);
+        doc.setFont("helvetica", "normal");
+        ty += 14;
+
+        doc.setFontSize(7);
+        doc.setTextColor(150, 150, 150);
+        doc.text("Estimations basees sur le marche bureaux Villeurbanne -- 150 EUR/m2/an (BureauxLocaux.com 2025)", col1, ty);
+      }
+    }
+
     // Photos
     if (photos.length > 0) {
       const loadImage = (url: string): Promise<HTMLImageElement> =>
