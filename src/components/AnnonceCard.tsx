@@ -32,7 +32,7 @@ export default function AnnonceCard({ annonce }: Props) {
           {annonce.type_espace}
         </span>
       </div>
-      <div className="p-5">
+      <div className="p-5 flex flex-col flex-1">
         <h3 className="font-heading font-semibold text-primary-foreground text-lg mb-2 line-clamp-2">
           {annonce.titre}
         </h3>
@@ -41,7 +41,7 @@ export default function AnnonceCard({ annonce }: Props) {
             <MapPin className="h-3.5 w-3.5" /> {annonce.batiment.nom}
           </p>
         )}
-        <div className="flex items-end justify-between">
+        <div className="mt-auto pt-3 flex items-end justify-between border-t border-lavender/20">
           <div>
             <span className="text-gold font-heading text-2xl font-bold">
               {annonce.prix_mensuel?.toLocaleString("fr-FR")} €
