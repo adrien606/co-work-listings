@@ -23,6 +23,9 @@ export default function PublicFooter() {
               <a href={`tel:${OWNER.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-gold transition-colors">
                 <Phone className="h-4 w-4" /> {OWNER.phone}
               </a>
+              <a href={OWNER.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
+                <Linkedin className="h-4 w-4" /> LinkedIn
+              </a>
             </div>
           </div>
           <div>

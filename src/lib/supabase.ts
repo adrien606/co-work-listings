@@ -9,4 +9,5 @@ export const OWNER = {
   name: "Adrien Rippe",
   email: "adrien@belaircamp.org",
   phone: "06 07 60 99 77",
+  linkedin: "https://fr.linkedin.com/in/adrien-rippe",
 } as const;
