@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, Building2, Users } from "lucide-react";
 
 export default function AdminAPropos() {
   const qc = useQueryClient();
@@ -11,6 +11,8 @@ export default function AdminAPropos() {
   const [sites, setSites] = useState("");
   const [surface, setSurface] = useState("");
   const [espaces, setEspaces] = useState("");
+  const [entreprises, setEntreprises] = useState("");
+  const [utilisateurs, setUtilisateurs] = useState("");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -23,6 +25,8 @@ export default function AdminAPropos() {
         setSites(c.sites || "");
         setSurface(c.surface || "");
         setEspaces(c.espaces || "");
+        setEntreprises(c.entreprises || "");
+        setUtilisateurs(c.utilisateurs || "");
       }
     })();
   }, []);
@@ -33,7 +37,7 @@ export default function AdminAPropos() {
       id: "about",
       titre,
       description,
-      chiffres: { sites, surface, espaces },
+      chiffres: { sites, surface, espaces, entreprises, utilisateurs },
     });
     if (error) toast.error("Erreur");
     else { toast.success("Page À propos mise à jour"); qc.invalidateQueries({ queryKey: ["page_content"] }); }
@@ -67,6 +71,23 @@ export default function AdminAPropos() {
           <div>
             <label className="block text-sm font-medium mb-1">Nombre d'espaces</label>
             <input value={espaces} onChange={(e) => setEspaces(e.target.value)} className="w-full px-3 py-2 rounded-md border bg-background text-sm" />
+          </div>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-4 pt-2">
+          <div>
+            <label className="flex items-center gap-2 text-sm font-medium mb-1">
+              <Building2 className="h-4 w-4 text-muted-foreground" />
+              Entreprises résidentes
+            </label>
+            <input value={entreprises} onChange={(e) => setEntreprises(e.target.value)} placeholder="110" className="w-full px-3 py-2 rounded-md border bg-background text-sm" />
+          </div>
+          <div>
+            <label className="flex items-center gap-2 text-sm font-medium mb-1">
+              <Users className="h-4 w-4 text-muted-foreground" />
+              Utilisateurs quotidiens
+            </label>
+            <input value={utilisateurs} onChange={(e) => setUtilisateurs(e.target.value)} placeholder="600" className="w-full px-3 py-2 rounded-md border bg-background text-sm" />
           </div>
         </div>
 
