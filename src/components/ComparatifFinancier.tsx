@@ -101,7 +101,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   const coutTotal3ansBail = fraisEntreeBail + (totalBail * 36) - franchiseEconomie;
 
   // Prestation
-  const surfaceAccessible = surfaceM2 + 250;
+  const surfaceAccessible = surfaceM2 + hyp.surfaceAccessibleFixe;
   const coutParPostePrestation = prixPrestation / postes;
   const coutM2Prestation = prixPrestation / surfaceAccessible;
   const fraisEntreePrestation = prixPrestation;
