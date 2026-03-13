@@ -32,8 +32,10 @@ export default function Index() {
     return annonces.filter((a) => {
       if (filtreContrat && a.conditions_bail !== filtreContrat) return false;
       if (filtreType && a.type_espace !== filtreType) return false;
-      if (filtreSurface === "small" && (a.surface || 0) >= 50) return false;
-      if (filtreSurface === "large" && (a.surface || 0) < 50) return false;
+      if (filtreSurface === "s1" && (a.surface || 0) >= 50) return false;
+      if (filtreSurface === "s2" && ((a.surface || 0) < 50 || (a.surface || 0) >= 100)) return false;
+      if (filtreSurface === "s3" && ((a.surface || 0) < 100 || (a.surface || 0) >= 200)) return false;
+      if (filtreSurface === "s4" && (a.surface || 0) < 200) return false;
       if (filtrePrix === "p1" && (a.prix_mensuel || 0) >= 500) return false;
       if (filtrePrix === "p2" && ((a.prix_mensuel || 0) < 500 || (a.prix_mensuel || 0) >= 1000)) return false;
       if (filtrePrix === "p3" && ((a.prix_mensuel || 0) < 1000 || (a.prix_mensuel || 0) >= 2000)) return false;
