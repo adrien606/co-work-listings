@@ -187,7 +187,7 @@ export default function Index() {
                     <td className="px-4 py-4 font-medium text-foreground">Accessibilité</td>
                     <td className="px-4 py-4 text-foreground">
                       <span className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        <Check className="h-4 w-4 text-[hsl(var(--success))] shrink-0 mt-0.5" />
                         24h/24, 7j/7, sécurisé
                       </span>
                     </td>
