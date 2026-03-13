@@ -217,8 +217,18 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
           {syntheseRows.map((r, i) => (
             <tr key={i} className="font-semibold">
               <td className="p-3 text-foreground">{r.label}</td>
-              <td className="p-3 text-center bg-muted text-orange-600">{r.bail}</td>
-              <td className="p-3 text-center bg-emerald-100 text-emerald-700">{r.presta}</td>
+              <td className="p-3 text-center bg-muted text-orange-600">
+                {r.bail}
+                {r.label.includes("Surface accessible") && (
+                  <div className="text-xs font-normal text-muted-foreground mt-1">bureau uniquement — cuisine et salles de réunion non incluses</div>
+                )}
+              </td>
+              <td className="p-3 text-center bg-emerald-100 text-emerald-700">
+                {r.presta}
+                {r.label.includes("Surface accessible") && (
+                  <div className="text-xs font-normal text-emerald-600 mt-1">environ 250 m² accessible</div>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
