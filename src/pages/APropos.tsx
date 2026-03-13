@@ -112,6 +112,75 @@ export default function APropos() {
         </section>
       )}
 
+      {/* FAQ */}
+      <section className="bg-light-section py-16">
+        <div className="container max-w-3xl">
+          <h2 className="font-heading text-2xl font-bold text-center mb-2 flex items-center justify-center gap-2">
+            <HelpCircle className="h-6 w-6 text-gold" />
+            FAQ — Bel Air Camp
+          </h2>
+          <p className="text-center text-muted-foreground mb-10">Toutes les réponses à vos questions</p>
+          
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>C'est quoi exactement la différence avec un bail classique ?</AccordionTrigger>
+              <AccordionContent>
+                Un bail classique, c'est de l'immobilier. Ici, c'est un contrat de prestation de services. Vous ne louez pas des murs, vous accédez à un espace 100 % opérationnel. Tout ce qui touche à la gestion du local — technique, réglementaire, administrative — est pris en charge. Vous arrivez, vous travaillez.
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Qu'est-ce qui est inclus dans le prix ?</AccordionTrigger>
+              <AccordionContent>
+                Électricité, charges locatives, taxe foncière, gestion technique, contrôles réglementaires. Aucun frais caché, aucune mauvaise surprise en fin de mois.
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="item-3">
+              <AccordionTrigger>C'est plus cher qu'un bail classique ?</AccordionTrigger>
+              <AccordionContent>
+                En apparence, le loyer au m² peut sembler plus élevé. Mais dans un bail classique, il faut ajouter les charges, la taxe foncière, les contrats de maintenance, les mises aux normes, la gestion technique… Une fois tout additionné, la différence est souvent minime — voire inexistante. Et surtout, ici il n'y a aucune immobilisation : c'est uniquement de la charge, pas du CAPEX. C'est beaucoup plus sain pour le bilan d'une entreprise.
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="item-4">
+              <AccordionTrigger>À qui ça s'adresse ?</AccordionTrigger>
+              <AccordionContent>
+                À toute entreprise ou indépendant qui veut se concentrer sur son activité plutôt que sur la gestion de son local. Un artisan, un prestataire de services, un organisme de formation, une startup — ils viennent produire ou travailler, pas gérer de l'immobilier.
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="item-5">
+              <AccordionTrigger>Quels engagements de durée ?</AccordionTrigger>
+              <AccordionContent>
+                C'est flexible selon le bâtiment et les besoins : à la journée, à la semaine, au mois ou à l'année. Pas d'engagement long terme imposé.
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="item-6">
+              <AccordionTrigger>Et si mon activité évolue, je peux changer d'espace ?</AccordionTrigger>
+              <AccordionContent>
+                Oui. Le modèle est pensé pour s'adapter à la croissance ou aux changements d'activité. Pas besoin de renégocier un bail sur 9 ans.
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="item-7">
+              <AccordionTrigger>Les espaces sont-ils aux normes ?</AccordionTrigger>
+              <AccordionContent>
+                Oui, et c'est justement l'un des grands avantages. Les contrôles réglementaires et la mise en conformité sont gérés par Bel Air Camp. Pour Bel Air School notamment, les espaces sont certifiés Qualiopi et classés ERP 5 — les organismes de formation peuvent exercer sans aucune démarche supplémentaire.
+              </AccordionContent>
+            </AccordionItem>
+            
+            <AccordionItem value="item-8">
+              <AccordionTrigger>Quand est-ce que je peux m'installer ?</AccordionTrigger>
+              <AccordionContent>
+                Très rapidement. Les espaces sont opérationnels dès la signature. Pas de travaux, pas d'attente.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
       {/* Contact */}
       <section className="bg-accent py-12">
         <div className="container text-center">
