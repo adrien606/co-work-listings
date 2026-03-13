@@ -137,7 +137,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
     { label: "Surface accessible", bail: `${fmtEur(surfaceM2)} m²`, presta: `~${fmtEur(surfaceAccessible)} m²` },
     { label: "Total mensuel réel", bail: `${fmtEur(totalBail)} €/mois`, presta: `${fmtEur(prixPrestation)} €/mois` },
     { label: "Coût par poste", bail: `${fmtEur(coutParPosteBail)} €`, presta: `${fmtEur(coutParPostePrestation)} €` },
-    { label: "Coût au m² accessible", bail: `${fmtEur(coutM2Bail)} €/m²`, presta: `${fmtEur(coutM2Prestation)} €/m²` },
+    { label: "Coût au m² accessible", bail: "—", presta: `${fmtEur(coutM2Prestation)} €/m²` },
     { label: "Frais d'entrée", bail: `~${fmtEur(fraisEntreeBail)} €`, presta: `${fmtEur(fraisEntreePrestation)} € (caution)` },
     { label: "Engagement minimum", bail: "3 ans", presta: "1 mois" },
     { label: "Préavis de sortie", bail: "6 mois", presta: "1 mois" },
