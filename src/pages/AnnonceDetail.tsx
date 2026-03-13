@@ -139,7 +139,7 @@ export default function AnnonceDetail() {
         const gestionTechM2 = 2.25;
         const menageM2 = 8;
         const assuranceM2 = 1.25;
-        const coeffSurface = 4;
+        const surfaceAccessibleFixe = 250;
         const franchiseMois = 1;
 
         const loyer = surf * (loyerM2An / 12);
