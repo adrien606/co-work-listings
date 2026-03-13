@@ -73,7 +73,6 @@ function SliderRow({ label, value, min, max, step, unit, onChange }: SliderRowPr
 }
 
 export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: ComparatifFinancierProps) {
-  const [open, setOpen] = useState(false);
   const [showHypotheses, setShowHypotheses] = useState(false);
   const [hyp, setHyp] = useState<Hypotheses>(DEFAULTS);
 
