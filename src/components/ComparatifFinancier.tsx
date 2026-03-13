@@ -106,8 +106,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   const surfaceAccessible = surfaceM2 * hyp.coeffSurface;
   const coutParPostePrestation = prixPrestation / postes;
   const coutM2Prestation = prixPrestation / surfaceAccessible;
-  const fraisEntreePrestation = prixPrestation;
-  const coutTotal3ansPrestation = fraisEntreePrestation + (prixPrestation * 36);
+  const coutTotal3ansPrestation = prixPrestation * 36;
 
   const economie3ans = coutTotal3ansBail - coutTotal3ansPrestation;
   const pourcentageEconomie = Math.round((economie3ans / coutTotal3ansBail) * 100);
