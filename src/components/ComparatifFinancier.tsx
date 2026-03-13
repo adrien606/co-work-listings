@@ -128,6 +128,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   ];
 
   const sharedRows = [
+    { label: "Franchise de loyer possible", bail: hyp.franchiseMois > 0 ? `⚠️ ${hyp.franchiseMois} mois (contre engagement 3-6 ans ferme)` : "⚠️ 0 mois (ajustable)", presta: "Aucun engagement requis" },
     { label: "Cuisine équipée / détente", bail: "❌ à aménager", presta: "✅ accès libre" },
     { label: "Salles de réunion", bail: "❌ externe ~50 €/h", presta: "✅ sur réservation" },
     { label: "Phone box / cabine acoustique", bail: "❌ non disponible", presta: "✅ accès libre" },
