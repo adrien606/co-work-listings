@@ -39,7 +39,7 @@ const DEFAULTS: Hypotheses = {
   menageM2: 8,
   assuranceM2: 1.25,
   m2ParPoste: 5,
-  coeffSurface: 4,
+  surfaceAccessibleFixe: 250,
   franchiseMois: 1,
 };
 
