@@ -5,6 +5,7 @@ import PublicFooter from "@/components/PublicFooter";
 import { OWNER } from "@/lib/supabase";
 import { prixM2Mois, prixM2An } from "@/lib/types";
 import { ArrowLeft, Share2, Download, Mail, Phone, MapPin, Calendar, FileText, CheckCircle, Linkedin, X, ChevronLeft, ChevronRight } from "lucide-react";
+import ComparatifFinancier from "@/components/ComparatifFinancier";
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { toast } from "sonner";
@@ -297,6 +298,11 @@ export default function AnnonceDetail() {
                     <p className="mt-3 text-sm text-muted-foreground">{annonce.conditions_notes}</p>
                   )}
                 </div>
+              )}
+
+              {/* Comparatif financier */}
+              {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
+                <ComparatifFinancier prixPrestation={annonce.prix_mensuel} surfaceM2={annonce.surface} />
               )}
 
               {/* Carte */}
