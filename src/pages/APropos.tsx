@@ -203,7 +203,12 @@ export default function APropos() {
       <section className="bg-accent py-12">
         <div className="container text-center">
           <h2 className="font-heading text-2xl font-bold text-accent-foreground mb-4">Contactez-nous</h2>
-          <p className="text-accent-foreground/80 mb-4 font-medium">{OWNER.name}</p>
+          <p className="text-accent-foreground/80 mb-4 font-medium">
+            {OWNER.name}
+            <a href={OWNER.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 ml-2 text-accent-foreground/60 hover:text-accent-foreground transition-colors">
+              <Linkedin className="h-4 w-4" />
+            </a>
+          </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href={`mailto:${OWNER.email}`} className="flex items-center gap-2 text-accent-foreground hover:underline">
               <Mail className="h-4 w-4" /> {OWNER.email}

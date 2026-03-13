@@ -376,7 +376,12 @@ export default function AnnonceDetail() {
                 {/* Contact */}
                 <div className="border-t pt-5">
                   <h3 className="font-heading font-semibold mb-3">Contact</h3>
-                  <p className="font-medium text-sm mb-2">{OWNER.name}</p>
+                  <p className="font-medium text-sm mb-2 flex items-center gap-2">
+                    {OWNER.name}
+                    <a href={OWNER.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                      <Linkedin className="h-4 w-4" />
+                    </a>
+                  </p>
                   <a href={`mailto:${OWNER.email}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-1.5">
                     <Mail className="h-4 w-4" /> {OWNER.email}
                   </a>
