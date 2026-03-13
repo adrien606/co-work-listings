@@ -41,7 +41,7 @@ const DEFAULTS: Hypotheses = {
   assuranceM2: 1.25,
   m2ParPoste: 5,
   coeffSurface: 4,
-  franchiseMois: 0,
+  franchiseMois: 1,
 };
 
 interface SliderRowProps {
