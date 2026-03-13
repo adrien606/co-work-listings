@@ -294,7 +294,12 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
             {syntheseRows.map((r, i) => (
               <div key={i} className="flex justify-between font-semibold">
                 <span className="text-foreground">{r.label}</span>
-                <span className="text-emerald-700">{r.presta}</span>
+                <span className="text-emerald-700">
+                  {r.presta}
+                  {r.label.includes("Surface accessible") && (
+                    <div className="text-xs font-normal text-emerald-600 mt-0.5 text-right">environ 250 m² accessible</div>
+                  )}
+                </span>
               </div>
             ))}
           </div>
