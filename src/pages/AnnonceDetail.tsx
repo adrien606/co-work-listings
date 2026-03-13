@@ -43,8 +43,9 @@ export default function AnnonceDetail() {
   const videos = annonce.medias?.filter((m) => m.type === "video") || [];
 
   const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    toast.success("Lien copié dans le presse-papier !");
+    const subject = encodeURIComponent(`Espace disponible : ${annonce.titre}`);
+    const body = encodeURIComponent(`Bonjour,\n\nJe vous partage cette annonce :\n${annonce.titre}\n\n${window.location.href}\n\nCordialement`);
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
   const handleDownloadPDF = async () => {
@@ -61,16 +62,18 @@ export default function AnnonceDetail() {
     doc.setFontSize(12);
     let y = 55;
 
+    const fmtNum = (n: number) => n.toLocaleString("fr-FR").replace(/\u202f/g, " ").replace(/\u00a0/g, " ");
+
     doc.setFontSize(16);
     doc.setTextColor(255, 205, 84);
-    doc.text(`${annonce.prix_mensuel?.toLocaleString("fr-FR")} €/mois`, 15, y);
+    doc.text(`${annonce.prix_mensuel ? fmtNum(annonce.prix_mensuel) : "—"} EUR/mois`, 15, y);
     y += 10;
 
     doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
-    doc.text(`Surface : ${annonce.surface} m²`, 15, y); y += 6;
-    if (pm2m) { doc.text(`Prix/m²/mois : ${pm2m.toLocaleString("fr-FR")} €`, 15, y); y += 6; }
-    if (pm2a) { doc.text(`Prix/m²/an : ${pm2a.toLocaleString("fr-FR")} €`, 15, y); y += 6; }
+    doc.text(`Surface : ${annonce.surface} m2`, 15, y); y += 6;
+    if (pm2m) { doc.text(`Prix/m2/mois : ${fmtNum(pm2m)} EUR`, 15, y); y += 6; }
+    if (pm2a) { doc.text(`Prix/m2/an : ${fmtNum(pm2a)} EUR`, 15, y); y += 6; }
     doc.text(`Type : ${annonce.type_espace}`, 15, y); y += 6;
     doc.text(`Charges : ${annonce.charges || "Non précisé"}`, 15, y); y += 6;
     doc.text(`Disponibilité : ${annonce.disponibilite || "Non précisé"}`, 15, y); y += 10;
@@ -95,7 +98,10 @@ export default function AnnonceDetail() {
       doc.text("Services inclus", 15, y); y += 6;
       doc.setFontSize(9);
       doc.setTextColor(80, 80, 80);
-      doc.text(annonce.services.map((s) => `${s.icone} ${s.nom}`).join(" • "), 15, y); y += 10;
+      annonce.services.forEach((s) => {
+        doc.text(`- ${s.nom}`, 15, y); y += 5;
+      });
+      y += 5;
     }
 
     if (annonce.conditions_duree || annonce.conditions_bail) {
@@ -111,18 +117,54 @@ export default function AnnonceDetail() {
       y += 5;
     }
 
-    // Contact footer
+    // Photos
+    if (photos.length > 0) {
+      const loadImage = (url: string): Promise<HTMLImageElement> =>
+        new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = url;
+        });
+
+      for (const photo of photos) {
+        try {
+          const img = await loadImage(photo.url);
+          doc.addPage();
+          const pageW = 210;
+          const pageH = 297;
+          const ratio = Math.min((pageW - 20) / img.width, (pageH - 20) / img.height);
+          const w = img.width * ratio;
+          const h = img.height * ratio;
+          const x = (pageW - w) / 2;
+          const yImg = (pageH - h) / 2;
+
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          canvas.getContext("2d")!.drawImage(img, 0, 0);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+
+          doc.addImage(dataUrl, "JPEG", x, yImg, w, h);
+        } catch {
+          // skip photo on error
+        }
+      }
+    }
+
+    // Contact footer on last page
     doc.setFillColor(29, 29, 86);
     doc.rect(0, 270, 210, 27, "F");
     doc.setTextColor(255, 205, 84);
     doc.setFontSize(11);
-    doc.text(`${OWNER.name} — ${OWNER.email} — ${OWNER.phone}`, 15, 282);
+    doc.text(`${OWNER.name} - ${OWNER.email} - ${OWNER.phone}`, 15, 282);
     doc.setTextColor(187, 184, 255);
     doc.setFontSize(8);
     doc.text(window.location.href, 15, 289);
 
     doc.save(`${annonce.titre.replace(/[^a-zA-Z0-9]/g, "_")}.pdf`);
-    toast.success("PDF téléchargé !");
+    toast.success("PDF telecharge !");
   };
 
   return (
@@ -321,7 +363,7 @@ export default function AnnonceDetail() {
                     onClick={handleShare}
                     className="flex-1 flex items-center justify-center gap-2 bg-lavender text-secondary-foreground font-medium py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm"
                   >
-                    <Share2 className="h-4 w-4" /> Partager
+                    <Mail className="h-4 w-4" /> Envoyer
                   </button>
                   <button
                     onClick={handleDownloadPDF}
