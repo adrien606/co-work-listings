@@ -152,6 +152,164 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Tableau comparatif */}
+      <section className="bg-primary py-16">
+        <div className="container max-w-5xl">
+          <h2 className="font-heading text-3xl font-bold text-center text-primary-foreground mb-2">
+            Pourquoi choisir Bel Air Camp ?
+          </h2>
+          <p className="text-lavender text-center mb-10 max-w-2xl mx-auto">
+            Comparez notre offre avec un bail commercial classique
+          </p>
+          
+          <div className="bg-card rounded-xl shadow-lg overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-sidebar-accent border-b border-border">
+                    <th className="text-left px-4 py-4 font-heading font-semibold text-foreground w-1/3">Critère</th>
+                    <th className="text-left px-4 py-4 font-heading font-semibold text-foreground w-1/3">
+                      <span className="flex items-center gap-2 text-gold">
+                        <Building2 className="h-4 w-4" />
+                        Bel Air Camp
+                      </span>
+                    </th>
+                    <th className="text-left px-4 py-4 font-heading font-semibold text-muted-foreground w-1/3">
+                      <span className="flex items-center gap-2">
+                        <Briefcase className="h-4 w-4" />
+                        Bail commercial classique (3-6-9)
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Accessibilité</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        24h/24, 7j/7, sécurisé
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        Selon bailleur, souvent limité
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Mobilier, IT & aménagement</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        Inclus et opérationnel
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        À investir par le locataire
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Charges (eau, électricité, entretien)</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        Incluses
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        À prévoir séparément
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Ménage & maintenance</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        Inclus
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        À organiser et financer
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Gestion administrative</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <FileText className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                        Ultra-simplifiée, contrat clé en main
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        Multiples démarches à gérer
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Flexibilité</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Clock className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                        Souple, court terme possible
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        Minimum 3 ans fermes, pénalités
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Coût</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Calculator className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                        Tout compris, sans surprise
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        Extras et imprévus possibles
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-4 font-medium text-foreground">Communauté & services</td>
+                    <td className="px-4 py-4 text-foreground">
+                      <span className="flex items-start gap-2">
+                        <Users className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                        Networking et services inclus
+                      </span>
+                    </td>
+                    <td className="px-4 py-4 text-muted-foreground">
+                      <span className="flex items-start gap-2">
+                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        Espace vide, aucun service
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <PublicFooter />
     </div>
   );
