@@ -139,7 +139,7 @@ export default function AnnonceDetail() {
         const gestionTechM2 = 2.25;
         const menageM2 = 8;
         const assuranceM2 = 1.25;
-        const coeffSurface = 4;
+        const surfaceAccessibleFixe = 250;
         const franchiseMois = 1;
 
         const loyer = surf * (loyerM2An / 12);
@@ -154,7 +154,7 @@ export default function AnnonceDetail() {
 
         const totalBail = loyer + taxeFonciere + charges + electricite + internet + mobilierMensuel + installationMensuel + gestionTech + menage + assurance;
         const coutParPosteBail = totalBail / postes;
-        const surfaceAccessible = surf * coeffSurface;
+        const surfaceAccessible = surf + surfaceAccessibleFixe;
         const coutParPostePrestation = prix / postes;
         const coutM2Prestation = prix / surfaceAccessible;
         const fraisEntreeBail = (loyer * 3) + loyer + (postes * mobilierPoste) + (surf * installationM2);

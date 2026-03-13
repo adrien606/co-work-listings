@@ -23,7 +23,7 @@ interface Hypotheses {
   menageM2: number;        // €/m²/mois (défaut 8)
   assuranceM2: number;     // €/m²/mois (défaut 1.25)
   m2ParPoste: number;      // m² par poste (défaut 5)
-  coeffSurface: number;    // multiplicateur surface accessible (défaut 4)
+  surfaceAccessibleFixe: number; // m² d'espaces partagés accessibles (défaut 250)
   franchiseMois: number;   // mois de franchise de loyer (défaut 0)
 }
 
@@ -39,7 +39,7 @@ const DEFAULTS: Hypotheses = {
   menageM2: 8,
   assuranceM2: 1.25,
   m2ParPoste: 5,
-  coeffSurface: 4,
+  surfaceAccessibleFixe: 250,
   franchiseMois: 1,
 };
 
@@ -101,7 +101,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
   const coutTotal3ansBail = fraisEntreeBail + (totalBail * 36) - franchiseEconomie;
 
   // Prestation
-  const surfaceAccessible = surfaceM2 * hyp.coeffSurface;
+  const surfaceAccessible = surfaceM2 + hyp.surfaceAccessibleFixe;
   const coutParPostePrestation = prixPrestation / postes;
   const coutM2Prestation = prixPrestation / surfaceAccessible;
   const fraisEntreePrestation = prixPrestation;
@@ -174,7 +174,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
         <SliderRow label="Ménage" value={hyp.menageM2} min={2} max={15} step={0.5} unit="€/m²/mois" onChange={update("menageM2")} />
         <SliderRow label="Assurance locaux" value={hyp.assuranceM2} min={0.5} max={4} step={0.25} unit="€/m²/mois" onChange={update("assuranceM2")} />
         <SliderRow label="Franchise de loyer" value={hyp.franchiseMois} min={0} max={6} step={1} unit="mois" onChange={update("franchiseMois")} />
-        <SliderRow label="Coeff. surface accessible (prestation uniquement)" value={hyp.coeffSurface} min={2} max={6} step={0.5} unit="×" onChange={update("coeffSurface")} />
+        
       </div>
     </div>
   );
