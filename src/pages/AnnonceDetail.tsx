@@ -463,7 +463,7 @@ export default function AnnonceDetail() {
               )}
 
               {/* Comparatif financier */}
-              {annonce.type_espace === "Bureau privatif" && annonce.prix_mensuel && annonce.surface && (
+              {annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.prix_mensuel && annonce.surface && (
                 <ComparatifFinancier prixPrestation={annonce.prix_mensuel} surfaceM2={annonce.surface} />
               )}
             </div>
