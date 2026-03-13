@@ -490,7 +490,7 @@ export default function AnnonceDetail() {
                   </div>
                   <div className="text-lavender text-sm">
                     {annonce.surface} m² — Charges {annonce.charges}
-                    {annonce.type_espace === "Bureau privatif" && annonce.surface && annonce.surface >= 4 && (
+                    {annonce.type_espace === "Bureau privatif" && annonce.conditions_bail !== "Bail commercial 3-6-9" && annonce.surface && annonce.surface >= 4 && (
                       <span className="ml-2 text-gold font-medium">· {Math.floor(annonce.surface / 4)} postes</span>
                     )}
                   </div>
