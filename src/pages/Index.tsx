@@ -115,9 +115,35 @@ export default function Index() {
                 ))}
               </select>
             </div>
+            <div className="flex-1 w-full">
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Surface</label>
+              <select
+                value={filtreSurface}
+                onChange={(e) => setFiltreSurface(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
+              >
+                <option value="">Toutes surfaces</option>
+                <option value="small">Moins de 50 m²</option>
+                <option value="large">Plus de 50 m²</option>
+              </select>
+            </div>
+            <div className="flex-1 w-full">
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Prix mensuel</label>
+              <select
+                value={filtrePrix}
+                onChange={(e) => setFiltrePrix(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
+              >
+                <option value="">Tous les prix</option>
+                <option value="p1">Moins de 500 €</option>
+                <option value="p2">500 – 1 000 €</option>
+                <option value="p3">1 000 – 2 000 €</option>
+                <option value="p4">Plus de 2 000 €</option>
+              </select>
+            </div>
             <button
-              onClick={() => { setFiltreContrat(""); setFiltreType(""); }}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 pb-1"
+              onClick={() => { setFiltreContrat(""); setFiltreType(""); setFiltreSurface(""); setFiltrePrix(""); }}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 pb-1 whitespace-nowrap"
             >
               Réinitialiser
             </button>
