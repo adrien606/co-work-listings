@@ -80,8 +80,9 @@ export default function PublicHeader() {
           <nav className="container flex flex-col gap-3 pt-3">
             {links.map((l) =>
               l.external ? (
-                <a key={l.to} href={l.to} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1 flex items-center gap-1">
-                  {l.label} <ExternalLink className="h-3 w-3" />
+                <a key={l.to} href={l.to} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className={`text-lavender hover:text-gold py-1 flex items-center gap-1 ${l.cta ? "font-medium" : ""}`}>
+                  {l.cta && <Calendar className="h-4 w-4" />}
+                  {l.label} {!l.cta && <ExternalLink className="h-3 w-3" />}
                 </a>
               ) : (
                 <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1">

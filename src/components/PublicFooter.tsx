@@ -26,6 +26,9 @@ export default function PublicFooter() {
               <a href={OWNER.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
                 <Linkedin className="h-4 w-4" /> LinkedIn
               </a>
+              <a href={OWNER.agenda} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gold transition-colors">
+                <Calendar className="h-4 w-4" /> Prendre rendez-vous
+              </a>
             </div>
           </div>
           <div>
