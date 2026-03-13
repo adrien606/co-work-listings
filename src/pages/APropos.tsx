@@ -2,7 +2,7 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import { usePageContent, useBatiments } from "@/hooks/useAnnonces";
 import { OWNER } from "@/lib/supabase";
-import { Mail, Phone, Building2, Ruler, LayoutGrid } from "lucide-react";
+import { Mail, Phone, Building2, Ruler, LayoutGrid, Users, Briefcase } from "lucide-react";
 
 export default function APropos() {
   const { data: content } = usePageContent();
@@ -32,7 +32,7 @@ export default function APropos() {
         <section className="bg-light-section py-16">
           <div className="container">
             <h2 className="font-heading text-2xl font-bold text-center mb-10">Chiffres clés</h2>
-            <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
               <div className="text-center">
                 <Building2 className="h-8 w-8 mx-auto mb-3 text-gold" />
                 <div className="font-heading text-4xl font-bold text-foreground">{chiffres.sites || "0"}</div>
@@ -47,6 +47,16 @@ export default function APropos() {
                 <LayoutGrid className="h-8 w-8 mx-auto mb-3 text-gold" />
                 <div className="font-heading text-4xl font-bold text-foreground">{chiffres.espaces || "0"}</div>
                 <div className="text-muted-foreground text-sm mt-1">Espaces proposés</div>
+              </div>
+              <div className="text-center">
+                <Briefcase className="h-8 w-8 mx-auto mb-3 text-gold" />
+                <div className="font-heading text-4xl font-bold text-foreground">{chiffres.entreprises || "0"}</div>
+                <div className="text-muted-foreground text-sm mt-1">Entreprises résidentes</div>
+              </div>
+              <div className="text-center">
+                <Users className="h-8 w-8 mx-auto mb-3 text-gold" />
+                <div className="font-heading text-4xl font-bold text-foreground">{chiffres.utilisateurs || "0"}</div>
+                <div className="text-muted-foreground text-sm mt-1">Utilisateurs quotidiens</div>
               </div>
             </div>
           </div>
