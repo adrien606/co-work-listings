@@ -43,8 +43,9 @@ export default function AnnonceDetail() {
   const videos = annonce.medias?.filter((m) => m.type === "video") || [];
 
   const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    toast.success("Lien copié dans le presse-papier !");
+    const subject = encodeURIComponent(`Espace disponible : ${annonce.titre}`);
+    const body = encodeURIComponent(`Bonjour,\n\nJe vous partage cette annonce :\n${annonce.titre}\n\n${window.location.href}\n\nCordialement`);
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
   const handleDownloadPDF = async () => {
