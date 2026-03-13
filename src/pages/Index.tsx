@@ -9,6 +9,8 @@ export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
   const [filtreContrat, setFiltreContrat] = useState("");
   const [filtreType, setFiltreType] = useState("");
+  const [filtreSurface, setFiltreSurface] = useState("");
+  const [filtrePrix, setFiltrePrix] = useState("");
 
   // Types de contrat disponibles (extraits des données)
   const typesContrat = useMemo(() => {
