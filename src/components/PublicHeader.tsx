@@ -31,9 +31,14 @@ export default function PublicHeader() {
                 href={l.to}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-sm font-medium text-lavender hover:text-gold transition-colors"
+                className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                  l.cta
+                    ? "bg-accent text-accent-foreground px-4 py-2 rounded-lg hover:bg-accent/90"
+                    : "text-lavender hover:text-gold"
+                }`}
               >
-                {l.label} <ExternalLink className="h-3 w-3" />
+                {l.cta && <Calendar className="h-4 w-4" />}
+                {l.label} {!l.cta && <ExternalLink className="h-3 w-3" />}
               </a>
             ) : (
               <Link
