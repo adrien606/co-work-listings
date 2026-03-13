@@ -3,7 +3,7 @@ import { usePublicAnnonces } from "@/hooks/useAnnonces";
 import AnnonceCard from "@/components/AnnonceCard";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
-import { Search } from "lucide-react";
+import { Search, Check, X, Building2, Briefcase, FileText, Zap, Sparkles, Clock, Users, Calculator } from "lucide-react";
 
 export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
