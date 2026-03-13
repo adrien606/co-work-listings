@@ -7,28 +7,43 @@ import { Search, Check, X, Building2, Briefcase, FileText, Zap, Sparkles, Clock,
 
 export default function Index() {
   const { data: annonces, isLoading } = usePublicAnnonces();
+  const [filtreContrat, setFiltreContrat] = useState("");
   const [filtreType, setFiltreType] = useState("");
-  const [filtreSurface, setFiltreSurface] = useState("");
-  const [filtrePrix, setFiltrePrix] = useState("");
+
+  // Types de contrat disponibles (extraits des données)
+  const typesContrat = useMemo(() => {
+    if (!annonces) return [];
+    const set = new Set(annonces.map((a) => a.conditions_bail).filter(Boolean) as string[]);
+    return Array.from(set).sort();
+  }, [annonces]);
+
+  // Types de produit disponibles (filtrés par contrat sélectionné)
+  const typesProduit = useMemo(() => {
+    if (!annonces) return [];
+    const base = filtreContrat ? annonces.filter((a) => a.conditions_bail === filtreContrat) : annonces;
+    const set = new Set(base.map((a) => a.type_espace).filter(Boolean));
+    return Array.from(set).sort();
+  }, [annonces, filtreContrat]);
 
   const filtered = useMemo(() => {
     if (!annonces) return [];
     return annonces.filter((a) => {
+      if (filtreContrat && a.conditions_bail !== filtreContrat) return false;
       if (filtreType && a.type_espace !== filtreType) return false;
-      if (filtreSurface === "small" && (a.surface || 0) >= 50) return false;
-      if (filtreSurface === "large" && (a.surface || 0) < 50) return false;
-      if (filtrePrix === "low" && (a.prix_mensuel || 0) >= 1000) return false;
-      if (filtrePrix === "high" && (a.prix_mensuel || 0) < 1000) return false;
       return true;
     });
-  }, [annonces, filtreType, filtreSurface, filtrePrix]);
+  }, [annonces, filtreContrat, filtreType]);
 
+  // Grouper par type de contrat, puis par type de produit
   const grouped = useMemo(() => {
-    const map = new Map<string, typeof filtered>();
+    const map = new Map<string, Map<string, typeof filtered>>();
     filtered.forEach((a) => {
-      const key = a.type_espace || "Autres";
-      if (!map.has(key)) map.set(key, []);
-      map.get(key)!.push(a);
+      const contratKey = a.conditions_bail || "Autre";
+      const produitKey = a.type_espace || "Autres";
+      if (!map.has(contratKey)) map.set(contratKey, new Map());
+      const sub = map.get(contratKey)!;
+      if (!sub.has(produitKey)) sub.set(produitKey, []);
+      sub.get(produitKey)!.push(a);
     });
     return map;
   }, [filtered]);
@@ -67,45 +82,33 @@ export default function Index() {
         <div className="container">
           <div className="bg-card rounded-xl shadow-lg p-4 md:p-6 flex flex-col md:flex-row gap-4 items-end">
             <div className="flex-1 w-full">
-              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Type d'espace</label>
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Type de contrat</label>
+              <select
+                value={filtreContrat}
+                onChange={(e) => { setFiltreContrat(e.target.value); setFiltreType(""); }}
+                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
+              >
+                <option value="">Tous les contrats</option>
+                {typesContrat.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex-1 w-full">
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Type de produit</label>
               <select
                 value={filtreType}
                 onChange={(e) => setFiltreType(e.target.value)}
                 className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
               >
                 <option value="">Tous les types</option>
-                <option>Bureau privatif</option>
-                <option>Open space flex</option>
-                <option>Atelier</option>
-                <option>Salle de formation</option>
-              </select>
-            </div>
-            <div className="flex-1 w-full">
-              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Surface</label>
-              <select
-                value={filtreSurface}
-                onChange={(e) => setFiltreSurface(e.target.value)}
-                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
-              >
-                <option value="">Toutes surfaces</option>
-                <option value="small">Moins de 50 m²</option>
-                <option value="large">Plus de 50 m²</option>
-              </select>
-            </div>
-            <div className="flex-1 w-full">
-              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Prix mensuel</label>
-              <select
-                value={filtrePrix}
-                onChange={(e) => setFiltrePrix(e.target.value)}
-                className="w-full px-3 py-2.5 rounded-lg border border-input bg-background text-sm"
-              >
-                <option value="">Tous les prix</option>
-                <option value="low">Moins de 1 000 €</option>
-                <option value="high">Plus de 1 000 €</option>
+                {typesProduit.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
               </select>
             </div>
             <button
-              onClick={() => { setFiltreType(""); setFiltreSurface(""); setFiltrePrix(""); }}
+              onClick={() => { setFiltreContrat(""); setFiltreType(""); }}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4 pb-1"
             >
               Réinitialiser
@@ -135,17 +138,25 @@ export default function Index() {
               <p className="text-lg">Aucun espace disponible pour le moment.</p>
             </div>
           ) : (
-            Array.from(grouped.entries()).map(([batimentNom, items]) => (
-              <div key={batimentNom} className="mb-12">
-                <h3 className="font-heading text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-gold" />
-                  {batimentNom}
+            Array.from(grouped.entries()).map(([contratNom, subMap]) => (
+              <div key={contratNom} className="mb-14">
+                <h3 className="font-heading text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-gold" />
+                  {contratNom}
                 </h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {items.map((a) => (
-                    <AnnonceCard key={a.id} annonce={a} />
-                  ))}
-                </div>
+                {Array.from(subMap.entries()).map(([produitNom, items]) => (
+                  <div key={produitNom} className="mb-8 ml-4">
+                    <h4 className="font-heading text-lg font-semibold text-muted-foreground mb-4 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-lavender" />
+                      {produitNom}
+                    </h4>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {items.map((a) => (
+                        <AnnonceCard key={a.id} annonce={a} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             ))
           )}
