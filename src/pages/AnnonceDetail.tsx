@@ -154,7 +154,7 @@ export default function AnnonceDetail() {
 
         const totalBail = loyer + taxeFonciere + charges + electricite + internet + mobilierMensuel + installationMensuel + gestionTech + menage + assurance;
         const coutParPosteBail = totalBail / postes;
-        const surfaceAccessible = surf * coeffSurface;
+        const surfaceAccessible = surf + surfaceAccessibleFixe;
         const coutParPostePrestation = prix / postes;
         const coutM2Prestation = prix / surfaceAccessible;
         const fraisEntreeBail = (loyer * 3) + loyer + (postes * mobilierPoste) + (surf * installationM2);
