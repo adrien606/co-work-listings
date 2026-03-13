@@ -193,7 +193,7 @@ export default function Index() {
                     </td>
                     <td className="px-4 py-4 text-muted-foreground">
                       <span className="flex items-start gap-2">
-                        <X className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                        <X className="h-4 w-4 text-[hsl(var(--destructive))] shrink-0 mt-0.5" />
                         Selon bailleur, souvent limité
                       </span>
                     </td>
