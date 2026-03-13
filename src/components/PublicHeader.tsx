@@ -66,11 +66,17 @@ export default function PublicHeader() {
       {open && (
         <div className="md:hidden bg-primary border-t border-sidebar-border pb-4">
           <nav className="container flex flex-col gap-3 pt-3">
-            {links.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1">
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) =>
+              l.external ? (
+                <a key={l.to} href={l.to} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1 flex items-center gap-1">
+                  {l.label} <ExternalLink className="h-3 w-3" />
+                </a>
+              ) : (
+                <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="text-lavender hover:text-gold py-1">
+                  {l.label}
+                </Link>
+              )
+            )}
             <div className="flex flex-col gap-2 text-sm text-lavender pt-2 border-t border-sidebar-border">
               <span className="text-primary-foreground font-medium">{OWNER.name}</span>
               <a href={`mailto:${OWNER.email}`} className="hover:text-gold">{OWNER.email}</a>
