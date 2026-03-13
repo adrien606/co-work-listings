@@ -338,7 +338,12 @@ export default function AnnonceDetail() {
                   <div className="text-gold font-heading text-3xl font-bold mb-1">
                     {annonce.prix_mensuel?.toLocaleString("fr-FR")} €<span className="text-lg text-lavender">/mois</span>
                   </div>
-                  <div className="text-lavender text-sm">{annonce.surface} m² — Charges {annonce.charges}</div>
+                  <div className="text-lavender text-sm">
+                    {annonce.surface} m² — Charges {annonce.charges}
+                    {annonce.type_espace === "Bureau privatif" && annonce.surface && annonce.surface >= 4 && (
+                      <span className="ml-2 text-gold font-medium">· {Math.floor(annonce.surface / 4)} postes</span>
+                    )}
+                  </div>
                   <div className="grid grid-cols-2 gap-3 mt-4">
                     {pm2m && (
                       <div className="bg-sidebar-accent rounded-md p-3 text-center">
