@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Slider } from "@/components/ui/slider";
-import { ChevronDown, SlidersHorizontal, RotateCcw } from "lucide-react";
+import { SlidersHorizontal, RotateCcw } from "lucide-react";
 
 interface ComparatifFinancierProps {
   prixPrestation: number;
@@ -74,7 +73,6 @@ function SliderRow({ label, value, min, max, step, unit, onChange }: SliderRowPr
 }
 
 export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: ComparatifFinancierProps) {
-  const [open, setOpen] = useState(false);
   const [showHypotheses, setShowHypotheses] = useState(false);
   const [hyp, setHyp] = useState<Hypotheses>(DEFAULTS);
 
@@ -292,42 +290,39 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
 
   return (
     <div className="mt-8">
-      <Collapsible open={open} onOpenChange={setOpen}>
-        <CollapsibleTrigger className="w-full flex items-center justify-between bg-primary text-primary-foreground rounded-lg px-5 py-3 font-medium hover:bg-primary/90 transition-colors">
-          <span>📊 Comparer avec un bail classique</span>
-          <ChevronDown className={`h-5 w-5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-        </CollapsibleTrigger>
-        <CollapsibleContent className="mt-4">
-          <div className="bg-card border rounded-lg p-4">
-            {/* Toggle hypothèses */}
-            <button
-              onClick={() => setShowHypotheses(!showHypotheses)}
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors"
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              {showHypotheses ? "Masquer les hypothèses" : "Ajuster les hypothèses"}
-              {isModified && <span className="text-xs text-accent">(modifiées)</span>}
-            </button>
+      <div className="bg-primary text-primary-foreground rounded-lg px-5 py-3 font-medium">
+        <span>📊 Comparer avec un bail classique</span>
+      </div>
+      <div className="mt-4">
+        <div className="bg-card border rounded-lg p-4">
+          {/* Toggle hypothèses */}
+          <button
+            onClick={() => setShowHypotheses(!showHypotheses)}
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors"
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+            {showHypotheses ? "Masquer les hypothèses" : "Ajuster les hypothèses"}
+            {isModified && <span className="text-xs text-accent">(modifiées)</span>}
+          </button>
 
-            {showHypotheses && <HypothesesPanel />}
+          {showHypotheses && <HypothesesPanel />}
 
-            <DesktopTable />
-            <MobileCards />
+          <DesktopTable />
+          <MobileCards />
 
-            {/* Bandeau économie */}
-            <div className="mt-4 bg-emerald-100 border border-emerald-200 rounded-lg px-5 py-4 text-center">
-              <p className="text-emerald-800 font-semibold text-base">
-                💡 Économie estimée sur 3 ans : {fmtEur(economie3ans)} € ({pourcentageEconomie} %) — sans engagement
-              </p>
-            </div>
-
-            <p className="mt-3 text-xs text-muted-foreground text-center">
-              Estimations basées sur le marché bureaux Villeurbanne — 150 €/m²/an (BureauxLocaux.com 2025)
-              {isModified && " · Hypothèses modifiées par l'utilisateur"}
+          {/* Bandeau économie */}
+          <div className="mt-4 bg-emerald-100 border border-emerald-200 rounded-lg px-5 py-4 text-center">
+            <p className="text-emerald-800 font-semibold text-base">
+              💡 Économie estimée sur 3 ans : {fmtEur(economie3ans)} € ({pourcentageEconomie} %) — sans engagement
             </p>
           </div>
-        </CollapsibleContent>
-      </Collapsible>
+
+          <p className="mt-3 text-xs text-muted-foreground text-center">
+            Estimations basées sur le marché bureaux Villeurbanne — 150 €/m²/an (BureauxLocaux.com 2025)
+            {isModified && " · Hypothèses modifiées par l'utilisateur"}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
