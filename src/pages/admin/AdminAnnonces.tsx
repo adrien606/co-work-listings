@@ -22,11 +22,19 @@ export default function AdminAnnonces() {
     const { id: _, created_at, updated_at, batiment, medias, services, ...rest } = a as any;
     const { data, error } = await supabase.from("annonces").insert({ ...rest, titre: `${a.titre} (copie)`, statut: "brouillon" }).select().single();
     if (error) { toast.error("Erreur"); return; }
-    // Copy services
-    const servicesRes = await supabase.from("annonce_services").select("service_id").eq("annonce_id", id);
+    // Copy services and medias
+    const [servicesRes, mediasRes] = await Promise.all([
+      supabase.from("annonce_services").select("service_id").eq("annonce_id", id),
+      supabase.from("medias").select("type, url, ordre").eq("annonce_id", id),
+    ]);
+    const inserts = [];
     if (servicesRes.data?.length) {
-      await supabase.from("annonce_services").insert(servicesRes.data.map((s: any) => ({ annonce_id: data.id, service_id: s.service_id })));
+      inserts.push(supabase.from("annonce_services").insert(servicesRes.data.map((s: any) => ({ annonce_id: data.id, service_id: s.service_id }))).then());
     }
+    if (mediasRes.data?.length) {
+      inserts.push(supabase.from("medias").insert(mediasRes.data.map((m: any) => ({ annonce_id: data.id, type: m.type, url: m.url, ordre: m.ordre }))).then());
+    }
+    await Promise.all(inserts);
     qc.invalidateQueries({ queryKey: ["annonces"] });
     toast.success("Annonce dupliquée en brouillon");
   };
