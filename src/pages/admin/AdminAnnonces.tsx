@@ -27,12 +27,12 @@ export default function AdminAnnonces() {
       supabase.from("annonce_services").select("service_id").eq("annonce_id", id),
       supabase.from("medias").select("type, url, ordre").eq("annonce_id", id),
     ]);
-    const inserts: Promise<any>[] = [];
+    const inserts = [];
     if (servicesRes.data?.length) {
-      inserts.push(supabase.from("annonce_services").insert(servicesRes.data.map((s: any) => ({ annonce_id: data.id, service_id: s.service_id }))));
+      inserts.push(supabase.from("annonce_services").insert(servicesRes.data.map((s: any) => ({ annonce_id: data.id, service_id: s.service_id }))).then());
     }
     if (mediasRes.data?.length) {
-      inserts.push(supabase.from("medias").insert(mediasRes.data.map((m: any) => ({ annonce_id: data.id, type: m.type, url: m.url, ordre: m.ordre }))));
+      inserts.push(supabase.from("medias").insert(mediasRes.data.map((m: any) => ({ annonce_id: data.id, type: m.type, url: m.url, ordre: m.ordre }))).then());
     }
     await Promise.all(inserts);
     qc.invalidateQueries({ queryKey: ["annonces"] });
