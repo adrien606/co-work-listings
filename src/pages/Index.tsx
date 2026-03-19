@@ -71,6 +71,9 @@ export default function Index() {
           <p className="text-lavender text-lg md:text-xl max-w-2xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
             Flexible, tout compris, prêt à l'emploi.
           </p>
+          <p className="text-lavender/80 text-sm md:text-base max-w-2xl mx-auto mb-8 animate-fade-in italic" style={{ animationDelay: "0.12s" }}>
+            Chez Bel Air Camp, on a la réputation de toujours trouver une solution. Les prix affichés sont une base de travail — si votre client a un projet, parlez-nous en.
+          </p>
           <p className="text-lavender/80 text-sm md:text-base max-w-3xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: "0.15s" }}>
             Acheter ou aménager ses propres locaux, c'est du CAPEX : un investissement lourd, figé, qui pèse sur le bilan et mobilise du capital. Bel Air Camp propose une alternative OPEX : vous payez l'espace que vous utilisez, quand vous en avez besoin, sans engagement long terme. Pour une PME en croissance, c'est une décision de trésorerie autant qu'une décision stratégique.
           </p>
