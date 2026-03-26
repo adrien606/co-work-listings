@@ -315,17 +315,7 @@ export default function ComparatifFinancier({ prixPrestation, surfaceM2 }: Compa
           <span>📊 Comparer avec un bail classique</span>
         </div>
         <div className="p-4">
-          {/* Toggle hypothèses */}
-          <button
-            onClick={() => setShowHypotheses(!showHypotheses)}
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors"
-          >
-            <SlidersHorizontal className="h-4 w-4" />
-            {showHypotheses ? "Masquer les hypothèses" : "Ajuster les hypothèses"}
-            {isModified && <span className="text-xs text-accent">(modifiées)</span>}
-          </button>
-
-          {showHypotheses && <HypothesesPanel />}
+          <HypothesesPanel />
 
           <DesktopTable />
           <MobileCards />
