@@ -86,7 +86,7 @@ export default function Index() {
             >
               Voir les espaces disponibles
             </button>
-            <p className="text-lavender/70 text-xs md:text-sm mt-4 max-w-xl text-center">
+            <p className="text-lavender/70 text-xs md:text-sm mt-4 max-w-xl text-center font-bold">
               Électricité, charges locatives, taxes foncières, assurances, contrôles réglementaires, maintenance… inclus
             </p>
           </div>
