@@ -8,7 +8,7 @@ interface Props {
 
 export default function AnnonceCard({ annonce }: Props) {
   const photo = annonce.medias?.[0]?.url;
-  const pm2 = prixM2Mois(annonce.prix_mensuel, annonce.surface);
+  const pm2 = prixM2An(annonce.prix_mensuel, annonce.surface);
 
   return (
     <Link
