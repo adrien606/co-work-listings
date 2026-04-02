@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Annonce, prixM2Mois } from "@/lib/types";
+import { Annonce, prixM2An } from "@/lib/types";
 import { MapPin, Maximize2 } from "lucide-react";
 
 interface Props {
