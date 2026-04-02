@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Annonce, prixM2Mois } from "@/lib/types";
+import { Annonce, prixM2An } from "@/lib/types";
 import { MapPin, Maximize2 } from "lucide-react";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 export default function AnnonceCard({ annonce }: Props) {
   const photo = annonce.medias?.[0]?.url;
-  const pm2 = prixM2Mois(annonce.prix_mensuel, annonce.surface);
+  const pm2 = prixM2An(annonce.prix_mensuel, annonce.surface);
 
   return (
     <Link
@@ -50,7 +50,7 @@ export default function AnnonceCard({ annonce }: Props) {
                 <span className="block text-gold text-xs font-medium">{Math.floor(annonce.surface / 4)} postes</span>
               )}
             </div>
-            {pm2 && <div>{pm2.toLocaleString("fr-FR")} €/m²</div>}
+            {pm2 && <div>{pm2.toLocaleString("fr-FR")} €/m²/an</div>}
           </div>
         </div>
       </div>
