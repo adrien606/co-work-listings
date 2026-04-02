@@ -50,7 +50,7 @@ export default function AnnonceCard({ annonce }: Props) {
                 <span className="block text-gold text-xs font-medium">{Math.floor(annonce.surface / 4)} postes</span>
               )}
             </div>
-            {pm2 && <div>{pm2.toLocaleString("fr-FR")} €/m²</div>}
+            {pm2 && <div>{pm2.toLocaleString("fr-FR")} €/m²/an</div>}
           </div>
         </div>
       </div>
