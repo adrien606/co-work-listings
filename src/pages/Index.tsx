@@ -55,7 +55,16 @@ export default function Index() {
       if (!sub.has(produitKey)) sub.set(produitKey, []);
       sub.get(produitKey)!.push(a);
     });
-    return map;
+    // Trier : bail 3-6-9 en premier, puis le reste
+    const sorted = new Map<string, Map<string, typeof filtered>>();
+    const priority = ["Bail commercial 3-6-9", "Bail 3-6-9"];
+    const keys = Array.from(map.keys()).sort((a, b) => {
+      const aP = priority.some(p => a.toLowerCase().includes(p.toLowerCase())) ? 0 : 1;
+      const bP = priority.some(p => b.toLowerCase().includes(p.toLowerCase())) ? 0 : 1;
+      return aP - bP;
+    });
+    keys.forEach(k => sorted.set(k, map.get(k)!));
+    return sorted;
   }, [filtered]);
 
   return (
