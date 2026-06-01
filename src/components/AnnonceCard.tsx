@@ -42,6 +42,16 @@ export default function AnnonceCard({ annonce }: Props) {
               {annonce.prix_mensuel?.toLocaleString("fr-FR")} €
             </span>
             <span className="text-lavender text-sm">/mois</span>
+            {annonce.prix_mensuel !== null && annonce.prix_mensuel !== undefined && (
+              <div className="text-lavender/70 text-xs mt-1">
+                <div>
+                  {(annonce.prix_mensuel * 12).toLocaleString("fr-FR")} €/an
+                </div>
+                <div className="text-gold/80">
+                  Engagement 12 mois : {(Math.round(annonce.prix_mensuel * 12 * 0.9)).toLocaleString("fr-FR")} €/an (-10 %)
+                </div>
+              </div>
+            )}
           </div>
           <div className="text-right text-sm text-lavender">
             <div>
