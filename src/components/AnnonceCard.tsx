@@ -47,9 +47,11 @@ export default function AnnonceCard({ annonce }: Props) {
                 <div>
                   {(annonce.prix_mensuel * 12).toLocaleString("fr-FR")} €/an
                 </div>
-                <div className="text-gold/80">
-                  Engagement 12 mois : {(Math.round(annonce.prix_mensuel * 12 * 0.9)).toLocaleString("fr-FR")} €/an (-10 %)
-                </div>
+                {annonce.conditions_bail !== "Bail commercial 3-6-9" && (
+                  <div className="text-gold/80">
+                    Engagement 12 mois : {(Math.round(annonce.prix_mensuel * 12 * 0.9)).toLocaleString("fr-FR")} €/an (-10 %)
+                  </div>
+                )}
               </div>
             )}
           </div>
