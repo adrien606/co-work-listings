@@ -90,8 +90,8 @@ export default function AdminAnnonces() {
               {annonces.map((a) => (
                 <tr key={a.id} className="border-b last:border-0 hover:bg-muted/30">
                   <td className="p-4">
-                    {a.medias?.[0]?.url ? (
-                      <img src={a.medias[0].url} alt="" className="w-12 h-12 rounded-md object-cover" />
+                    {a.medias?.find((media) => media.type === "photo")?.url ? (
+                      <img src={a.medias.find((media) => media.type === "photo")?.url} alt="" className="w-12 h-12 rounded-md object-cover" />
                     ) : (
                       <div className="w-12 h-12 rounded-md bg-muted" />
                     )}

@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function AnnonceCard({ annonce }: Props) {
-  const photo = annonce.medias?.[0]?.url;
+  const photo = annonce.medias?.find((media) => media.type === "photo")?.url;
   const pm2 = prixM2An(annonce.prix_mensuel, annonce.surface);
 
   return (

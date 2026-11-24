@@ -7,6 +7,7 @@ import type { Annonce, Media } from "@/lib/types";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, Upload, X, Loader2 } from "lucide-react";
+import { matterportUrlSchema } from "@/lib/matterport";
 
 export default function AdminAnnonceForm() {
   const { id } = useParams();
@@ -28,6 +29,7 @@ export default function AdminAnnonceForm() {
   const [existingMedias, setExistingMedias] = useState<Media[]>([]);
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const [videoUrl, setVideoUrl] = useState("");
+  const [matterportUrl, setMatterportUrl] = useState("");
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
 
@@ -48,7 +50,10 @@ export default function AdminAnnonceForm() {
         });
       }
       const { data: medias } = await supabase.from("medias").select("*").eq("annonce_id", id).order("ordre");
-      if (medias) setExistingMedias(medias);
+      if (medias) {
+        setExistingMedias(medias);
+        setMatterportUrl(medias.find((m) => m.type === "matterport")?.url || "");
+      }
       const { data: as_ } = await supabase.from("annonce_services").select("service_id").eq("annonce_id", id);
       if (as_) setSelectedServices(as_.map((s: any) => s.service_id));
     })();
@@ -74,6 +79,8 @@ export default function AdminAnnonceForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.titre.trim()) { toast.error("Le titre est requis"); return; }
+    const visitResult = matterportUrlSchema.safeParse(matterportUrl);
+    if (!visitResult.success) { toast.error(visitResult.error.issues[0]?.message || "Lien Matterport invalide"); return; }
     setSaving(true);
 
     try {
@@ -97,18 +104,33 @@ export default function AdminAnnonceForm() {
 
       let annonceId = id;
       if (isEdit) {
-        await supabase.from("annonces").update(payload).eq("id", id);
+        const { error } = await supabase.from("annonces").update(payload).eq("id", id);
+        if (error) throw error;
       } else {
         const { data, error } = await supabase.from("annonces").insert(payload).select().single();
         if (error) throw error;
         annonceId = data.id;
       }
+      if (!annonceId) throw new Error("Annonce introuvable");
+
+      // A remote visit can be shared by multiple listings.
+      const currentVisit = existingMedias.find((m) => m.type === "matterport");
+      if (visitResult.data) {
+        const visitPayload = { annonce_id: annonceId, type: "matterport", url: visitResult.data, ordre: 10000 };
+        const { error } = currentVisit
+          ? await supabase.from("medias").update(visitPayload).eq("id", currentVisit.id)
+          : await supabase.from("medias").insert(visitPayload);
+        if (error) throw error;
+      } else if (currentVisit) {
+        const { error } = await supabase.from("medias").delete().eq("id", currentVisit.id);
+        if (error) throw error;
+      }
 
       // Services
-      await supabase.from("annonce_services").delete().eq("annonce_id", annonceId!);
+      await supabase.from("annonce_services").delete().eq("annonce_id", annonceId);
       if (selectedServices.length > 0) {
         await supabase.from("annonce_services").insert(
-          selectedServices.map((sid) => ({ annonce_id: annonceId!, service_id: sid }))
+          selectedServices.map((sid) => ({ annonce_id: annonceId, service_id: sid }))
         );
       }
 
@@ -123,7 +145,7 @@ export default function AdminAnnonceForm() {
           if (error) { toast.error(`Erreur upload: ${file.name}`); continue; }
           const { data: urlData } = supabase.storage.from("medias").getPublicUrl(path);
           await supabase.from("medias").insert({
-            annonce_id: annonceId!,
+            annonce_id: annonceId,
             type: file.type.startsWith("video") ? "video" : "photo",
             url: urlData.publicUrl,
             ordre: existingMedias.length + i,
@@ -135,7 +157,7 @@ export default function AdminAnnonceForm() {
       // Video URL
       if (videoUrl.trim()) {
         await supabase.from("medias").insert({
-          annonce_id: annonceId!,
+          annonce_id: annonceId,
           type: "video",
           url: videoUrl.trim(),
           ordre: existingMedias.length + newFiles.length,
@@ -143,6 +165,7 @@ export default function AdminAnnonceForm() {
       }
 
       qc.invalidateQueries({ queryKey: ["annonces"] });
+      qc.invalidateQueries({ queryKey: ["annonce", annonceId] });
       toast.success(isEdit ? "Annonce modifiée" : "Annonce créée");
       navigate("/admin");
     } catch (err: any) {
@@ -168,7 +191,7 @@ export default function AdminAnnonceForm() {
           <h2 className="font-heading font-semibold mb-4">Médias</h2>
           {existingMedias.length > 0 && (
             <div className="flex flex-wrap gap-3 mb-4">
-              {existingMedias.map((m) => (
+              {existingMedias.filter((m) => m.type !== "matterport").map((m) => (
                 <div key={m.id} className="relative w-24 h-24">
                   {m.type === "photo" ? (
                     <img src={m.url} alt="" className="w-full h-full object-cover rounded-md" />
@@ -204,6 +227,18 @@ export default function AdminAnnonceForm() {
             onChange={(e) => setVideoUrl(e.target.value)}
             className="mt-3 w-full px-3 py-2 rounded-md border bg-background text-sm"
           />
+          <div className="mt-5">
+            <label htmlFor="matterport-url" className="block text-sm font-medium mb-1">Visite virtuelle 3D — lien Matterport</label>
+            <input
+              id="matterport-url"
+              type="url"
+              maxLength={2048}
+              placeholder="https://my.matterport.com/show/?m=..."
+              value={matterportUrl}
+              onChange={(e) => setMatterportUrl(e.target.value)}
+              className="w-full px-3 py-2 rounded-md border bg-background text-sm"
+            />
+          </div>
         </section>
 
         {/* Informations */}

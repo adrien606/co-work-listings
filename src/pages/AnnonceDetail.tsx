@@ -9,10 +9,12 @@ import ComparatifFinancier from "@/components/ComparatifFinancier";
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import MatterportVisit from "@/components/MatterportVisit";
+import { buildListingShareUrl, getMatterportUrl } from "@/lib/matterport";
 
 export default function AnnonceDetail() {
   const { id } = useParams<{ id: string }>();
-  const { data: annonce, isLoading } = useAnnonce(id!);
+  const { data: annonce, isLoading } = useAnnonce(id || "");
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
@@ -44,11 +46,10 @@ export default function AnnonceDetail() {
   const pm2a = prixM2An(annonce.prix_mensuel, annonce.surface);
   const photos = annonce.medias?.filter((m) => m.type === "photo") || [];
   const videos = annonce.medias?.filter((m) => m.type === "video") || [];
+  const matterportUrl = getMatterportUrl(annonce.medias);
 
   const handleShare = () => {
-    const subject = encodeURIComponent(`Espace disponible : ${annonce.titre}`);
-    const body = encodeURIComponent(`Bonjour,\n\nJe vous partage cette annonce :\n${annonce.titre}\n\n${window.location.href}\n\nCordialement`);
-    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    window.location.href = buildListingShareUrl(annonce.titre, window.location.href, matterportUrl);
   };
 
   const handleDownloadPDF = async () => {
@@ -64,6 +65,17 @@ export default function AnnonceDetail() {
     doc.setTextColor(29, 29, 86);
     doc.setFontSize(12);
     let y = 55;
+
+    if (matterportUrl) {
+      doc.setFontSize(12);
+      doc.setTextColor(29, 29, 86);
+      doc.textWithLink("Ouvrir la visite virtuelle 3D (Matterport)", 15, y, { url: matterportUrl });
+      y += 7;
+      doc.setFontSize(8);
+      const visitLines = doc.splitTextToSize(matterportUrl, 180);
+      doc.text(visitLines, 15, y);
+      y += visitLines.length * 4 + 8;
+    }
 
     const fmtNum = (n: number) => n.toLocaleString("fr-FR").replace(/\u202f/g, " ").replace(/\u00a0/g, " ");
 
@@ -290,7 +302,9 @@ export default function AnnonceDetail() {
           const canvas = document.createElement("canvas");
           canvas.width = img.width;
           canvas.height = img.height;
-          canvas.getContext("2d")!.drawImage(img, 0, 0);
+          const context = canvas.getContext("2d");
+          if (!context) continue;
+          context.drawImage(img, 0, 0);
           const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
 
           doc.addImage(dataUrl, "JPEG", x, yImg, w, h);
@@ -326,7 +340,8 @@ export default function AnnonceDetail() {
 
           <div className="grid lg:grid-cols-5 gap-8">
             {/* Left: Photos */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 min-w-0">
+              {matterportUrl && <MatterportVisit url={matterportUrl} />}
               {photos.length > 0 ? (
                 <>
                   <button
@@ -469,7 +484,7 @@ export default function AnnonceDetail() {
             </div>
 
             {/* Right: Info sidebar */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 min-w-0">
               <div className="bg-card rounded-lg border p-6 sticky top-24">
                 <span className="inline-block bg-lavender text-secondary-foreground text-xs font-medium px-3 py-1 rounded-full mb-4">
                   {annonce.type_espace}
